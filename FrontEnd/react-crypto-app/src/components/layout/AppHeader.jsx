@@ -2,6 +2,7 @@ import { Layout, Select, Space, Button, Drawer } from 'antd';
 import { useContext, useState } from 'react';
 import { CryptoContext } from '../../context/crypto-context';
 import AddCoinForm from './AddCoinForm';
+import TelegramWidget from './TelegramWidget';
 
 const headerStyle = {
   width: '100%',
@@ -17,7 +18,7 @@ const headerStyle = {
 
 
 export default function AppHeader(){
-const [drawer, setDrawer] = useState(true)
+const [drawer, setDrawer] = useState(false)
 const {prices, wallet, selectCoins} = useContext(CryptoContext)
 
 const handleSelect = (value) =>{
@@ -26,33 +27,37 @@ const handleSelect = (value) =>{
 
     return(
     <Layout.Header style={headerStyle}>
-      <Select
-    style={{ width: 250 }}
-    onSelect={handleSelect}
-    value="press / to open"
-    options={selectCoins.map((coin)=>({
-      label: coin.name,
-      value: coin.symbol,
-      icon: coin.imageUrl
-    }))}
-    optionRender={option => (
-      <Space>
-        <img src={option.data.icon} alt={option.data.label} style={{width: 20}}/> {option.data.label}
-      </Space>
-    )}
-  />
-  <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+    <Select
+      style={{ width: 250 }}
+      onSelect={handleSelect}
+      value="press / to open"
+      options={selectCoins.map((coin) => ({
+        label: coin.name,
+        value: coin.symbol,
+        icon: coin.imageUrl,
+      }))}
+      optionRender={(option) => (
+        <Space>
+          <img src={option.data.icon} alt={option.data.label} style={{ width: 20 }} /> {option.data.label}
+        </Space>
+      )}
+    />
 
-    <Drawer
-        width={'20%'}
-        title="Add Coin"
-        closable={{ 'aria-label': 'Close Button' }}
-        onClose={() => setDrawer(false)}
-        open={drawer}
-        padding={'0rem'}
-        destroyOnHidden>
-          <AddCoinForm/>
-      </Drawer>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+    <TelegramWidget />
+    <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+  </div>
+
+  <Drawer
+    width={'20%'}
+    title="Add Coin"
+    closable={{ 'aria-label': 'Close Button' }}
+    onClose={() => setDrawer(false)}
+    open={drawer}
+    padding={'0rem'}
+    destroyOnHidden>
+    <AddCoinForm />
+  </Drawer>
 
     </Layout.Header>
 )

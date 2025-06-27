@@ -37,7 +37,7 @@ export const fetchCryptoWallet = async () =>{
 export const fetchSelectCoins = async () => {
   try 
     {
-      const response = await fetch(`https://localhost:7093/api/Coin/list`)
+      const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`)
         .then(res => res.json())
 
         const fullCoinData = await Promise.all(response); 
