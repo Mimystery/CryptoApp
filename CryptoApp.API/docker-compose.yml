@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  postgres:
+    container_name: postgresCrypto
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: adm
+      POSTGRES_PASSWORD: adm
+      POSTGRES_DB: CryptoDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  crypto-app:
+     container_name: cryptoapp-web
+     build:
+       context: ..
+       dockerfile: Dockerfile
+     ports:
+     - "7028:8080"
+     depends_on:
+     - postgres
+     environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  postgres_data:

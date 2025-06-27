@@ -3,10 +3,8 @@ using CryptoApp.DataAccess;
 using CryptoApp.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000"; // Render передаёт PORT
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -18,7 +16,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5173");
+        policy.WithOrigins("*");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });
@@ -34,8 +32,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICoinsRepository, CoinsRepository>();
 builder.Services.AddScoped<ICoinsService, CoinsService>();
 
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Host=dpg-d1f9kiemcj7s739j6eo0-a;Port=5432;Database=cryptodb_mrv7;Username=admin;Password=CxLuyrwfzlxTr0TcjYCJEThQRSQWgdmd;SSL Mode=Require;Trust Server Certificate=true
 
 app.UseCors();
 
