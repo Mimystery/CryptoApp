@@ -3,6 +3,8 @@ using CryptoApp.DataAccess;
 using CryptoApp.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000"; // Render передаёт PORT
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -31,6 +33,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICoinsRepository, CoinsRepository>();
 builder.Services.AddScoped<ICoinsService, CoinsService>();
+
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 var app = builder.Build();
 
