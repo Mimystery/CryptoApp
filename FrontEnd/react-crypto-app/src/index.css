@@ -1,0 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.ant-tabs, .ant-tabs-content, .ant-tabs-tabpane-active {
+  height: 100%;
+}

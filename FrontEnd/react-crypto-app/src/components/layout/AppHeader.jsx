@@ -1,0 +1,59 @@
+import { Layout, Select, Space, Button, Drawer } from 'antd';
+import { useContext, useState } from 'react';
+import { CryptoContext } from '../../context/crypto-context';
+import AddCoinForm from './AddCoinForm';
+
+const headerStyle = {
+  width: '100%',
+  textAlign: 'center',
+  height: 60,
+  padding: '1rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  background: 'white',
+  borderBottom: '1px solid #d9d9d9',
+};
+
+
+export default function AppHeader(){
+const [drawer, setDrawer] = useState(true)
+const {prices, wallet, selectCoins} = useContext(CryptoContext)
+
+const handleSelect = (value) =>{
+  console.log(value)
+}
+
+    return(
+    <Layout.Header style={headerStyle}>
+      <Select
+    style={{ width: 250 }}
+    onSelect={handleSelect}
+    value="press / to open"
+    options={selectCoins.map((coin)=>({
+      label: coin.name,
+      value: coin.symbol,
+      icon: coin.imageUrl
+    }))}
+    optionRender={option => (
+      <Space>
+        <img src={option.data.icon} alt={option.data.label} style={{width: 20}}/> {option.data.label}
+      </Space>
+    )}
+  />
+  <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+
+    <Drawer
+        width={'20%'}
+        title="Add Coin"
+        closable={{ 'aria-label': 'Close Button' }}
+        onClose={() => setDrawer(false)}
+        open={drawer}
+        padding={'0rem'}
+        destroyOnHidden>
+          <AddCoinForm/>
+      </Drawer>
+
+    </Layout.Header>
+)
+}
