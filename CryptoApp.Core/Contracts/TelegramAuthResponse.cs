@@ -16,10 +16,10 @@ namespace CryptoApp.Core.Contracts
         public int AuthDate { get; set; }
 
         [JsonPropertyName("first_name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [JsonPropertyName("last_name")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [JsonPropertyName("hash")]
         public string Hash { get; set; }
@@ -28,6 +28,6 @@ namespace CryptoApp.Core.Contracts
         public string Username { get; set; }
 
         [JsonPropertyName("photo_url")]
-        public string PhotoUrl { get; set; }
+        public string? PhotoUrl { get; set; }
     }
 }

@@ -17,20 +17,20 @@ export default function TelegramWidget() {
 
       console.log(user)
 
-    //   fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(user),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log('🔵 Ответ от сервера:', data);
-    //     })
-    //     .catch((err) => {
-    //       console.error('❌ Ошибка отправки:', err);
-    //     });
+      fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('🔵 Ответ от сервера:', data);
+        })
+        .catch((err) => {
+          console.error('❌ Ошибка отправки:', err);
+        });
     };
 
     // Создаём скрипт Telegram
