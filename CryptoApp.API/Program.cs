@@ -44,6 +44,12 @@ var app = builder.Build();
 // Host=dpg-d1f9kiemcj7s739j6eo0-a;Port=5432;Database=cryptodb_mrv7;Username=admin;Password=CxLuyrwfzlxTr0TcjYCJEThQRSQWgdmd;SSL Mode=Require;Trust Server Certificate=true
 
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CoinsDbContext>();
+    db.Database.Migrate(); // применяет все миграции
+}
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors();
