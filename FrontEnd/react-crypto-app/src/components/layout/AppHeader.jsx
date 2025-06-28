@@ -46,9 +46,22 @@ console.log(isAuthenticated);
     />
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-    <TelegramWidget />
-    <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
-  </div>
+      {!isAuthenticated ? (
+        <TelegramWidget />
+      ) : (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <img
+              src={user?.photo_url}
+              alt={user?.first_name}
+              style={{ width: '32px', height: '32px', borderRadius: '50%' }}
+            />
+            <span>{user?.first_name}</span>
+          </div>
+          <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+        </>
+      )}
+    </div>
 
   <Drawer
     width={'20%'}

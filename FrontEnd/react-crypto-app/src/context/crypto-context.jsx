@@ -17,6 +17,7 @@ const [wallet, setWallet] = useState([]);
 const [loading, setLoading] = useState(true);
 const [selectCoins, setSelectCoins] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
+const [user, setUser] = useState(null);
 
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
@@ -67,7 +68,8 @@ useEffect(() =>{
 
 
     return(
-    <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated}}>
+    <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated, 
+    setIsAuthenticated, user, setUser}}>
         {children}
     </CryptoContext.Provider>
     )

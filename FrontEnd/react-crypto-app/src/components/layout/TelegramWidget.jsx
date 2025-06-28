@@ -3,7 +3,7 @@ import { fetchSelectCoins } from '../../api';
 import { CryptoContext } from '../../context/crypto-context';
 
 export default function TelegramWidget() {
-const { setIsAuthenticated } = useContext(CryptoContext)
+const { setIsAuthenticated, setUser } = useContext(CryptoContext)
 
   useEffect(() => {
     // Глобальная функция, которую вызывает Telegram
@@ -27,6 +27,8 @@ const { setIsAuthenticated } = useContext(CryptoContext)
       {
       localStorage.setItem('jwt', data.token);
       setIsAuthenticated(true);
+      setUser(user)
+      window.location.reload();
       } 
       else 
       {
