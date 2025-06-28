@@ -29,7 +29,7 @@ namespace CryptoApp.Application.Services
             var existingTgUser = await _tgUserRepository.GetById(telegramUser.Id);
             if (existingTgUser == null)
             {
-                AddTelegramUser(telegramUser);
+                await AddTelegramUser(telegramUser);
             }
 
             return _jwtService.GenerateToken(telegramUser);
