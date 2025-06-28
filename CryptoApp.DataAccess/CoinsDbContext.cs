@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoApp.Core.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace CryptoApp.DataAccess
         {
         }
         public DbSet<CoinEntity> Coins { get; set; }
+        public DbSet<TelegramUserEntity> TelegramUsers { get; set; }
+        public DbSet<CoinTransactionEntity> CoinTransactions { get; set; }
     }
 }

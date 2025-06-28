@@ -1,4 +1,7 @@
-﻿using CryptoApp.Core.Contracts;
+﻿using AutoMapper;
+using CryptoApp.Application.Services;
+using CryptoApp.Core.Contracts;
+using CryptoApp.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoApp.API.Controllers
@@ -7,6 +10,15 @@ namespace CryptoApp.API.Controllers
     [Route("api/[controller]")]
     public class TelegramController : ControllerBase
     {
+        private readonly ITelegramUserService _tgUserService;
+        private readonly IMapper _mapper;
+
+        public TelegramController(ITelegramUserService tgUserService, IMapper mapper)
+        {
+            _tgUserService = tgUserService;
+            _mapper = mapper;
+        }
+
         [HttpPost("auth")]
         public ActionResult<TelegramAuthResponse> Authenticate([FromBody] TelegramAuthResponse data)
         {
@@ -23,7 +35,11 @@ namespace CryptoApp.API.Controllers
             Console.WriteLine($"Дата авторизации (Unix): {data.AuthDate}");
             Console.WriteLine($"Hash (подпись): {data.Hash}");
 
-            return Ok(data);
+            var mappedData = _mapper.Map<TelegramUser>(data);
+
+            var token = _tgUserService.LoginTelegramUser(mappedData);
+
+            return Ok(mappedData + $"$Token: {token}");
         }
     }
 }

@@ -1,7 +1,9 @@
+using CryptoApp.Application.Authentication;
 using CryptoApp.Application.Services;
 using CryptoApp.DataAccess;
 using CryptoApp.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +34,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICoinsRepository, CoinsRepository>();
 builder.Services.AddScoped<ICoinsService, CoinsService>();
 
+builder.Services.AddScoped<ITelegramUserRepository, TelegramUserRepository>();
+builder.Services.AddScoped<ITelegramUserService, TelegramUserService>();
+
+builder.Services.AddScoped<IJwtService, JwtService>();
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,6 +66,7 @@ app.UseCors();
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();
