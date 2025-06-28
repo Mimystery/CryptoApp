@@ -25,6 +25,8 @@ const handleSelect = (value) =>{
   console.log(value)
 }
 
+console.log(isAuthenticated);
+
     return(
     <Layout.Header style={headerStyle}>
     <Select

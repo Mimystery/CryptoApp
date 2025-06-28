@@ -9,6 +9,7 @@ export const CryptoContext = createContext({
     selectCoins: [],
     isAuthenticated: false,
     loading: false,
+    setIsAuthenticated: () => {},
 })
 
 export const CryptoContextProvider = ({children}) => {
@@ -28,42 +29,44 @@ useEffect(() =>{
   }
 }, [])
 
-  useEffect(() => {
-    const fetchCryptoPrice = async () =>{
-        let prices = await fetchPrice();
-        let wallet = await fetchCryptoWallet();
+  const fetchCryptoPrice = useCallback(async () => {
+    let prices = await fetchPrice();
+    let wallet = await fetchCryptoWallet();
 
-        setWallet(wallet.map(walletCoin => {
-          const coin = prices.find((c) => c.symbol === walletCoin.symbol)
-          return {
-            grow: walletCoin.price < coin.price,
-            growPercent: percentDifference(walletCoin.price, coin.price),
-            totalMoney: walletCoin.amount * coin.price,
-            totalProfit: walletCoin.amount * coin.price - walletCoin.amount * walletCoin.price,
-            ...walletCoin
-          }
-        }))
-        setPrices(prices)
-        setLoading(false)
-    }
+    setWallet(wallet.map(walletCoin => {
+      const coin = prices.find((c) => c.symbol === walletCoin.symbol)
+      return {
+        grow: walletCoin.price < coin.price,
+        growPercent: percentDifference(walletCoin.price, coin.price),
+        totalMoney: walletCoin.amount * coin.price,
+        totalProfit: walletCoin.amount * coin.price - walletCoin.amount * walletCoin.price,
+        ...walletCoin
+      }
+    }))
+    setPrices(prices)
+    setLoading(false)
+  }, []);
 
-    fetchCryptoPrice()
-    const interval = setInterval(fetchCryptoPrice, 2000); 
-
-    return () => clearInterval(interval); 
+  const fetchCryptoSelect = useCallback(async () => {
+    setLoading(true)
+    let selectCoins = await fetchSelectCoins();
+    setSelectCoins(selectCoins)
+    setLoading(false)
   }, []);
 
   useEffect(() => {
-    const fetchCryptoSelect = async () => {
-        setLoading(true)
-        let selectCoins = await fetchSelectCoins();
-        setSelectCoins(selectCoins)
-        setLoading(false)
-
+    if (isAuthenticated) {
+      fetchCryptoSelect();
+      fetchCryptoPrice();
     }
-    fetchCryptoSelect()
-  }, []);
+  }, [isAuthenticated, fetchCryptoPrice, fetchCryptoSelect]);
 
+useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const interval = setInterval(fetchCryptoPrice, 2000);
+    return () => clearInterval(interval);
+  }, [isAuthenticated, fetchCryptoPrice]);
 
     return(
     <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated}}>
