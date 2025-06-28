@@ -4,17 +4,6 @@ export default function TelegramWidget() {
   useEffect(() => {
     // Глобальная функция, которую вызывает Telegram
     window.onTelegramAuth = function (user) {
-      alert(
-        'Logged in as ' +
-          user.first_name +
-          ' ' +
-          user.last_name +
-          ' (' +
-          user.id +
-          (user.username ? ', @' + user.username : '') +
-          ')'
-      );
-
       console.log(user)
 
       fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
@@ -22,6 +11,7 @@ export default function TelegramWidget() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(user),
       })
         .then((res) => res.json())

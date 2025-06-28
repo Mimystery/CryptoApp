@@ -41,22 +41,27 @@ namespace CryptoApp.Application.Services
         {
             var botToken = "7600592513:AAGDpmp_GIzFd6VmD61Ha0S-kCyUnX4xCJ8";
 
-            var dataCheckString = $"auth_date={telegramUser.AuthDate}\n" +
-                                  $"first_name={telegramUser.FirstName}\n" +
-                                  (telegramUser.LastName != null ? $"last_name={telegramUser.LastName}\n" : "") +
-                                  $"id={telegramUser.Id}\n" +
-                                  (telegramUser.PhotoUrl != null ? $"photo_url={telegramUser.PhotoUrl}\n" : "") +
-                                  (telegramUser.Username != null ? $"username={telegramUser.Username}\n" : "");
+            var dataDict = new SortedDictionary<string, string>();
 
-            dataCheckString = dataCheckString.TrimEnd('\n');
+            dataDict["auth_date"] = telegramUser.AuthDate.ToString();
+            dataDict["first_name"] = telegramUser.FirstName;
+            dataDict["id"] = telegramUser.Id.ToString();
 
-            var secretKey = Encoding.UTF8.GetBytes(
-                Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(botToken)))
-            );
+            if (!string.IsNullOrEmpty(telegramUser.LastName))
+                dataDict["last_name"] = telegramUser.LastName;
+            if (!string.IsNullOrEmpty(telegramUser.Username))
+                dataDict["username"] = telegramUser.Username;
+            if (!string.IsNullOrEmpty(telegramUser.PhotoUrl))
+                dataDict["photo_url"] = telegramUser.PhotoUrl;
 
+            // Составляем строку: key=value\nkey=value\n...
+            var dataCheckString = string.Join("\n", dataDict.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+
+            // Генерируем секретный ключ
+            var secretKey = SHA256.HashData(Encoding.UTF8.GetBytes(botToken));
             using var hmac = new HMACSHA256(secretKey);
-            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dataCheckString));
-            var hexHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
+            var hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(dataCheckString));
+            var hexHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
             return hexHash == telegramUser.Hash.ToLower();
         }
