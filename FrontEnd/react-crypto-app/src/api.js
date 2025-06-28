@@ -44,14 +44,14 @@ export const fetchSelectCoins = async () => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
-    }).then(res => res.json());
+    });
 
     if (!response.ok) {
       throw new Error('Ошибка авторизации');
     }
 
-        const fullCoinData = await Promise.all(response); 
-        return fullCoinData;
+      const data = await response.json(); 
+      return data;
     }
     catch (error) 
     {
