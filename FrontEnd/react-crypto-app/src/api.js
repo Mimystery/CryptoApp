@@ -40,11 +40,12 @@ export const fetchSelectCoins = async () => {
       const token = localStorage.getItem('jwt');
       const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`,{
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
     }).then(res => res.json());
-    
+
     if (!response.ok) {
       throw new Error('Ошибка авторизации');
     }
