@@ -2,6 +2,7 @@
 using CryptoApp.Application.Services;
 using CryptoApp.Core.Contracts;
 using CryptoApp.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoApp.API.Controllers
@@ -12,32 +13,27 @@ namespace CryptoApp.API.Controllers
     {
         private readonly ITelegramUserService _tgUserService;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public TelegramController(ITelegramUserService tgUserService, IMapper mapper)
+        public TelegramController(ITelegramUserService tgUserService, IMapper mapper, IHttpContextAccessor httpContext)
         {
             _tgUserService = tgUserService;
             _mapper = mapper;
+            _httpContext = httpContext;
         }
 
         [HttpPost("auth")]
         public async Task<ActionResult<TelegramAuthResponse>> Authenticate([FromBody] TelegramAuthResponse data)
         {
-            if (data == null)
+            if (!_tgUserService.VerifyTelegramAuth(data))
             {
-                return BadRequest("Invalid authentication data.");
+                return Unauthorized("Invalid data");
             }
-
-            Console.WriteLine("🔥 Получены данные от Telegram:");
-            Console.WriteLine($"ID: {data.Id}");
-            Console.WriteLine($"Username: @{data.Username}");
-            Console.WriteLine($"Имя: {data.FirstName} {data.LastName}");
-            Console.WriteLine($"Фото: {data.PhotoUrl}");
-            Console.WriteLine($"Дата авторизации (Unix): {data.AuthDate}");
-            Console.WriteLine($"Hash (подпись): {data.Hash}");
-
             var mappedData = _mapper.Map<TelegramUser>(data);
 
             var token = await _tgUserService.LoginTelegramUser(mappedData);
+
+            _httpContext.HttpContext.Response.Cookies.Append("first-cookies", token);
 
             return Ok(token);
         }

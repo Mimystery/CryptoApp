@@ -1,4 +1,5 @@
-﻿using CryptoApp.Core.Models;
+﻿using CryptoApp.Core.Contracts;
+using CryptoApp.Core.Models;
 
 namespace CryptoApp.Application.Services
 {
@@ -6,6 +7,7 @@ namespace CryptoApp.Application.Services
     {
         Task<TelegramUser> GetTelegramUserById(int id);
         Task AddTelegramUser(TelegramUser telegramUser);
+        public bool VerifyTelegramAuth(TelegramAuthResponse telegramUser);
         Task<string> LoginTelegramUser(TelegramUser telegramUser);
     }
 }

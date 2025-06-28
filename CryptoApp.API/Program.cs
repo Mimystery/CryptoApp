@@ -1,7 +1,9 @@
+using CryptoApp.API.Extensions;
 using CryptoApp.Application.Authentication;
 using CryptoApp.Application.Services;
 using CryptoApp.DataAccess;
 using CryptoApp.DataAccess.Repositories;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -29,6 +31,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+
 builder.Services.AddDbContext<CoinsDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(CoinsDbContext)));
@@ -44,7 +48,10 @@ builder.Services.AddScoped<ITelegramUserService, TelegramUserService>();
 
 builder.Services.AddScoped<IJwtService, JwtService>();
 
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+var jwtOptions = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
+builder.Services.AddApiAuthentication(Options.Create(jwtOptions));
+
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
@@ -70,6 +77,13 @@ app.UseSwaggerUI();
 app.UseCors();
 
 app.UseHttpsRedirection();
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
+});
 
 app.UseAuthorization();
 app.UseAuthorization();

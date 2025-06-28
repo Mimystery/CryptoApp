@@ -2,11 +2,12 @@
 using CryptoApp.Application.Services;
 using CryptoApp.Core.Contracts;
 using CryptoApp.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoApp.API.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CoinController : ControllerBase
@@ -55,6 +56,7 @@ namespace CryptoApp.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("list")]
         public async Task<ActionResult<List<Coin>>> GetCoinList()
         {
