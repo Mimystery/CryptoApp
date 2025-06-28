@@ -1,4 +1,5 @@
 ﻿using CryptoApp.Core.Models;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -18,6 +19,7 @@ namespace CryptoApp.Application.Authentication
         public JwtService(IOptions<JwtOptions> options)
         {
             _options = options.Value;
+            Console.WriteLine($"Jwt SecretKey: {_options.SecretKey}");
         }
 
         public string GenerateToken(TelegramUser tgUser)
