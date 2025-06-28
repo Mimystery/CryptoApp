@@ -35,7 +35,7 @@ namespace CryptoApp.API.Controllers
 
             _httpContext.HttpContext.Response.Cookies.Append("first-cookies", token);
 
-            return Ok(token);
+            return Ok(new {token});
         }
     }
 }
