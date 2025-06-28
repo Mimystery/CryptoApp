@@ -7,6 +7,7 @@ export const CryptoContext = createContext({
     wallet: [],
     crypto: [],
     selectCoins: [],
+    isAuthenticated: false,
     loading: false,
 })
 
@@ -15,7 +16,17 @@ const [prices, setPrices] = useState([]);
 const [wallet, setWallet] = useState([]);
 const [loading, setLoading] = useState(true);
 const [selectCoins, setSelectCoins] = useState([]);
+const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+useEffect(() =>{
+  const token = localStorage.getItem('jwt');
+  if(token){
+    setIsAuthenticated(true);
+  }
+  else{
+    setIsAuthenticated(false);
+  }
+}, [])
 
   useEffect(() => {
     const fetchCryptoPrice = async () =>{
@@ -55,7 +66,7 @@ const [selectCoins, setSelectCoins] = useState([]);
 
 
     return(
-    <CryptoContext.Provider value={{prices, wallet, loading, selectCoins}}>
+    <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated}}>
         {children}
     </CryptoContext.Provider>
     )

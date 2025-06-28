@@ -19,7 +19,7 @@ const headerStyle = {
 
 export default function AppHeader(){
 const [drawer, setDrawer] = useState(false)
-const {prices, wallet, selectCoins} = useContext(CryptoContext)
+const {prices, wallet, selectCoins, isAuthenticated} = useContext(CryptoContext)
 
 const handleSelect = (value) =>{
   console.log(value)
@@ -45,7 +45,7 @@ const handleSelect = (value) =>{
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     <TelegramWidget />
-    <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+    <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
 
   <Drawer

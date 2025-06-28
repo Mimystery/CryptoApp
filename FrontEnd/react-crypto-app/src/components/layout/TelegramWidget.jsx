@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { fetchSelectCoins } from '../../api';
+import { CryptoContext } from '../../context/crypto-context';
 
 export default function TelegramWidget() {
+const { setIsAuthenticated } = useContext(CryptoContext)
+
   useEffect(() => {
     // Глобальная функция, которую вызывает Telegram
     window.onTelegramAuth = function (user) {
@@ -18,12 +21,12 @@ export default function TelegramWidget() {
         .then((res) => res.json())
         .then((data) => {
           console.log('🔵 Ответ от сервера:', data);
-          let selectCoins = fetchSelectCoins();
-          console.log(selectCoins)
+          
           
       if (data.token) 
       {
       localStorage.setItem('jwt', data.token);
+      setIsAuthenticated(true);
       } 
       else 
       {
