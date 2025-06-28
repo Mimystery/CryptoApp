@@ -23,7 +23,7 @@ services:
      depends_on:
      - postgres
      environment:
-     - JwtOptions__SecretKey=cryptoappWnRpptcweQusavbmaoWismx
+     - JwtOptions__SecretKey=cryptoappWnRpptcweQusavbmaoWismxcryptoappWnRpptcweQusavbmaoWismx
      - ASPNETCORE_ENVIRONMENT=Development
 
 volumes:

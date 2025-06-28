@@ -24,6 +24,7 @@ WORKDIR /app
 # Открываем порт (если требуется, для Render и других)
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://+:5000
+ENV JwtOptions__SecretKey=cryptoappWnRpptcweQusavbmaoWismxcryptoappWnRpptcweQusavbmaoWismx
 
 COPY --from=build /app/publish .
 
