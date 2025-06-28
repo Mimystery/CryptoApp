@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { fetchSelectCoins } from '../../api';
 
 export default function TelegramWidget() {
   useEffect(() => {
@@ -19,12 +20,16 @@ export default function TelegramWidget() {
           console.log('🔵 Ответ от сервера:', data);
           let selectCoins = fetchSelectCoins();
           console.log(selectCoins)
-          if (data.token) {
-        localStorage.setItem('jwt', data.token);
-      } else {
+          
+      if (data.token) 
+      {
+      localStorage.setItem('jwt', data.token);
+      } 
+      else 
+      {
         console.error('⚠️ Токен отсутствует в ответе:', data);
       }
-        })
+      })
         .catch((err) => {
           console.error('❌ Ошибка отправки:', err);
         });
