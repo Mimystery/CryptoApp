@@ -37,8 +37,17 @@ export const fetchCryptoWallet = async () =>{
 export const fetchSelectCoins = async () => {
   try 
     {
-      const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`)
-        .then(res => res.json())
+      const token = localStorage.getItem('jwt');
+      const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`,{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    }).then(res => res.json());
+    
+    if (!response.ok) {
+      throw new Error('Ошибка авторизации');
+    }
 
         const fullCoinData = await Promise.all(response); 
         return fullCoinData;
