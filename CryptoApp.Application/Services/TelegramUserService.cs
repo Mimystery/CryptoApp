@@ -39,7 +39,7 @@ namespace CryptoApp.Application.Services
 
         public bool VerifyTelegramAuth(TelegramAuthResponse telegramUser)
         {
-            var botToken = "7600592513:AAHQ0qRxhxmOvbWRUlhJqxpaFPZOe7cUZbY";
+            var botToken = "7600592513:AAGDpmp_GIzFd6VmD61Ha0S-kCyUnX4xCJ8";
 
             var dataCheckString = $"auth_date={telegramUser.AuthDate}\n" +
                                   $"first_name={telegramUser.FirstName}\n" +

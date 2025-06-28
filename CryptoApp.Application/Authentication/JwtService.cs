@@ -19,7 +19,6 @@ namespace CryptoApp.Application.Authentication
         public JwtService(IOptions<JwtOptions> options)
         {
             _options = options.Value;
-            Console.WriteLine($"Jwt SecretKey: {_options.SecretKey}");
         }
 
         public string GenerateToken(TelegramUser tgUser)
