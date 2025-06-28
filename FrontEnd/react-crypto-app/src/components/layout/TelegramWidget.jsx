@@ -17,8 +17,9 @@ export default function TelegramWidget() {
         .then((res) => res.json())
         .then((data) => {
           console.log('🔵 Ответ от сервера:', data);
+          let selectCoins = fetchSelectCoins();
+          console.log(selectCoins)
           if (data.token) {
-        // ✅ Сохраняем токен
         localStorage.setItem('jwt', data.token);
       } else {
         console.error('⚠️ Токен отсутствует в ответе:', data);
