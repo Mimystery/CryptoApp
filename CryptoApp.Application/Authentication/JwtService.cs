@@ -20,16 +20,16 @@ namespace CryptoApp.Application.Authentication
             _options = options.Value;
         }
 
-        public string GenerateToken(TelegramUser thUser)
+        public string GenerateToken(TelegramUser tgUser)
         {
             //id,first_name,username,photo_url,
 
             var claims = new List<Claim>
             {
-                new Claim("Id", thUser.Id.ToString()),
-                new Claim("FirstName", thUser.FirstName ?? string.Empty),
-                new Claim("UserName", thUser.LastName ?? string.Empty),
-                new Claim("PhotoUrl", thUser.PhotoUrl ?? string.Empty),
+                new Claim("Id", tgUser.Id.ToString()),
+                new Claim("FirstName", tgUser.FirstName ?? string.Empty),
+                new Claim("UserName", tgUser.LastName ?? string.Empty),
+                new Claim("PhotoUrl", tgUser.PhotoUrl ?? string.Empty),
             };
 
             var signingCredentials = new SigningCredentials(

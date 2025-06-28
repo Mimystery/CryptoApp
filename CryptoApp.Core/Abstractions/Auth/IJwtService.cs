@@ -4,6 +4,6 @@ namespace CryptoApp.Application.Authentication
 {
     public interface IJwtService
     {
-        string GenerateToken(TelegramUser);
+        string GenerateToken(TelegramUser tgUser);
     }
 }
