@@ -23,11 +23,12 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowVercel", policy =>
     {
-        policy.WithOrigins("*");
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
+        policy.WithOrigins("https://crypto-app-ten-omega.vercel.app") 
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); 
     });
 });
 
@@ -74,7 +75,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors();
+app.UseCors("AllowVercel");
 
 app.UseHttpsRedirection();
 
