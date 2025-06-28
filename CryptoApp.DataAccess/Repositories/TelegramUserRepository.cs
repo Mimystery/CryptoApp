@@ -23,7 +23,7 @@ namespace CryptoApp.DataAccess.Repositories
 
         public async Task<TelegramUser> GetById(int id)
         {
-            var telegramUser = await _context.TelegramUsers.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id) ?? throw new KeyNotFoundException($"Telegram user with ID {id} not found.");
+            var telegramUser = await _context.TelegramUsers.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
 
             return _mapper.Map<TelegramUser>(telegramUser);
         }

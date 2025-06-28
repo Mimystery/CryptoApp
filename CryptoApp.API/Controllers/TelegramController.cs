@@ -20,7 +20,7 @@ namespace CryptoApp.API.Controllers
         }
 
         [HttpPost("auth")]
-        public ActionResult<TelegramAuthResponse> Authenticate([FromBody] TelegramAuthResponse data)
+        public async Task<ActionResult<TelegramAuthResponse>> Authenticate([FromBody] TelegramAuthResponse data)
         {
             if (data == null)
             {
@@ -37,9 +37,9 @@ namespace CryptoApp.API.Controllers
 
             var mappedData = _mapper.Map<TelegramUser>(data);
 
-            var token = _tgUserService.LoginTelegramUser(mappedData);
+            var token = await _tgUserService.LoginTelegramUser(mappedData);
 
-            return Ok(mappedData + $"$Token: {token}");
+            return Ok(token);
         }
     }
 }
