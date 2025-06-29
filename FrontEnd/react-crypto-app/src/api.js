@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { cryptoWallet } from "./data";
 import axios from 'axios';
+import { CryptoContext } from "./context/crypto-context";
 
 const symbols = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"];
 const ids = ['bitcoin', 'ethereum', 'solana', 'binancecoin', 'ripple'];
@@ -35,6 +37,8 @@ export const fetchCryptoWallet = async () =>{
 }
 
 export const fetchSelectCoins = async () => {
+  const { isAuthenticated } = useContext(CryptoContext)
+  if(!isAuthenticated)
   try 
     {
       const token = localStorage.getItem('jwt');
