@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
    allowedHosts: [
       'crypto-app-ukgs.vercel.app',
-      '2854-31-182-61-2.ngrok-free.app'
+      '2854-31-182-61-2.ngrok-free.app',
+      'cryptoapp-1-dsnm.onrender.com'
     ],
   },
 })
