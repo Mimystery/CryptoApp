@@ -70,7 +70,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CoinsDbContext>();
-    db.Database.Migrate(); // применяет все миграции
+    db.Database.Migrate(); 
 }
 
 app.UseSwagger();

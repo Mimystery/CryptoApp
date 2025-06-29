@@ -21,7 +21,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
         .then((res) => res.json())
         .then((data) => {
           console.log('🔵 Ответ от сервера:', data);
-          
+          console.log(user)
           
       if (data.token) 
       {
