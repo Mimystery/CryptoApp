@@ -44,7 +44,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-widget.js?22';
     script.async = true;
-    script.setAttribute('data-telegram-login', 'cryptoappservicebot');
+    script.setAttribute('data-telegram-login', 'cryptoappauthbot');
     script.setAttribute('data-size', 'medium');
     script.setAttribute('data-radius', '10');
     script.setAttribute('data-request-access', 'write');
