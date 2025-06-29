@@ -10,7 +10,8 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
     window.onTelegramAuth = function (user) {
       console.log(user)
       localStorage.setItem('userData', JSON.stringify(user));
-      setUser(user)
+      //const userForUser = JSON.parse(localStorage.getItem('userData'))
+      setUser(JSON.parse(localStorage.getItem('userData') || 'null'))
 
       fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
         method: 'POST',

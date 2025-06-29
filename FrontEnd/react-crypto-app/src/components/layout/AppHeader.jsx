@@ -29,6 +29,7 @@ const handleSelect = (value) =>{
 const userDataRaw = localStorage.getItem('userData')
 const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
 console.log("Header user:" + userData.id);
+console.log("User from context:" + user.id);
 
     return(
     <Layout.Header style={headerStyle}>
@@ -50,6 +51,8 @@ console.log("Header user:" + userData.id);
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     <TelegramWidget />
+    <img src={userData?.photo_url} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%' }} />
+          <span>{userData?.first_name}</span>
     <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
 
