@@ -19,7 +19,7 @@ const headerStyle = {
 
 export default function AppHeader(){
 const [drawer, setDrawer] = useState(false)
-const {prices, wallet, selectCoins, isAuthenticated} = useContext(CryptoContext)
+const {prices, wallet, selectCoins, isAuthenticatedб, user} = useContext(CryptoContext)
 
 const handleSelect = (value) =>{
   console.log(value)

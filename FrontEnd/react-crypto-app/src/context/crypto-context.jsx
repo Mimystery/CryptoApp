@@ -8,6 +8,7 @@ export const CryptoContext = createContext({
     crypto: [],
     selectCoins: [],
     isAuthenticated: false,
+    user: null,
     loading: false,
 })
 
