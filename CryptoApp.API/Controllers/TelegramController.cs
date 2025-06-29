@@ -33,8 +33,6 @@ namespace CryptoApp.API.Controllers
 
             var token = await _tgUserService.LoginTelegramUser(mappedData);
 
-            _httpContext.HttpContext.Response.Cookies.Append("first-cookies", token);
-
             return Ok(new {token});
         }
     }
