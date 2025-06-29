@@ -62,6 +62,7 @@ useEffect(() =>{
   }, []);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
@@ -71,7 +72,7 @@ useEffect(() =>{
 
     }
     fetchCryptoSelect()
-  }, []);
+  }, [isAuthenticated]);
 
 
     return(
