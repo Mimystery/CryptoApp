@@ -78,7 +78,7 @@ useEffect(() =>{
 
     return(
     <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated, 
-    setIsAuthenticated, user, setUser}}>
+    setIsAuthenticated, user, setUser, setLoading}}>
         {children}
     </CryptoContext.Provider>
     )

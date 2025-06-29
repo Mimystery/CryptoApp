@@ -3,15 +3,14 @@ import { fetchSelectCoins } from '../../api';
 import { CryptoContext } from '../../context/crypto-context';
 
 export default function TelegramWidget() {
-const { setIsAuthenticated, setUser } = useContext(CryptoContext)
+const { setIsAuthenticated, setUser, setLoading } = useContext(CryptoContext)
 
   useEffect(() => {
-    // Глобальная функция, которую вызывает Telegram
     window.onTelegramAuth = function (user) {
       console.log(user)
       localStorage.setItem('userData', JSON.stringify(user));
       setUser(user)
-
+      setLoading(true)
       fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
         method: 'POST',
         headers: {
@@ -29,6 +28,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
       {
       localStorage.setItem('jwt', data.token);
       setIsAuthenticated(true);
+      setLoading(false)
       window.location.reload();
       } 
       else 
