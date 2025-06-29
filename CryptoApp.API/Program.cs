@@ -23,9 +23,9 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowVercel", policy =>
+    options.AddPolicy("AllowRender", policy =>
     {
-        policy.WithOrigins("https://crypto-app-ten-omega.vercel.app") 
+        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com/") 
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); 
@@ -75,7 +75,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("AllowVercel");
+app.UseCors("AllowRender");
 
 app.UseHttpsRedirection();
 
