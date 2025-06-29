@@ -28,7 +28,6 @@ const { setIsAuthenticated, setUser, setLoading } = useContext(CryptoContext)
       {
       localStorage.setItem('jwt', data.token);
       setIsAuthenticated(true);
-      setLoading(false)
       window.location.reload();
       } 
       else 
@@ -38,6 +37,8 @@ const { setIsAuthenticated, setUser, setLoading } = useContext(CryptoContext)
       })
         .catch((err) => {
           console.error('❌ Ошибка отправки:', err);
+        }).finally(() => {
+          setLoading(false);
         });
     };
 
