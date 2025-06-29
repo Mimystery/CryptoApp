@@ -39,7 +39,7 @@ namespace CryptoApp.Application.Services
 
         public bool VerifyTelegramAuth(TelegramAuthResponse telegramUser)
         {
-            var botToken = "8023005622:AAF-g-G44TJfg3Ss91NS1vJmqTN-7x3T0OI";
+            var botToken = "7656094747:AAEc_AyJ_FbJ_LtLaaE2SCgUwGB2kL5CdSU";
 
             var dataDict = new SortedDictionary<string, string>();
 
