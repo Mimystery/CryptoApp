@@ -52,9 +52,9 @@ console.log("User from context:" + user?.id);
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     {!isAuthenticated && <TelegramWidget />}
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
       <img src={userAvatar}></img>
-      <span>{userData?.first_name}</span>
+      <span style={{ fontWeight: '600', fontSize: '16px', color: '#333' }}>{userData?.first_name}</span>
     </div>
     <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
