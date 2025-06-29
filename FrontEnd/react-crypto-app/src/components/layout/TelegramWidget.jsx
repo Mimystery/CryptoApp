@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { use, useContext, useEffect } from 'react';
 import { fetchSelectCoins } from '../../api';
 import { CryptoContext } from '../../context/crypto-context';
 
@@ -26,6 +26,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
       if (data.token) 
       {
       localStorage.setItem('jwt', data.token);
+      localStorage.setItem('userDate', user);
       setIsAuthenticated(true);
       setUser(user)
       //window.location.reload();
