@@ -23,7 +23,7 @@ const [user, setUser] = useState(null);
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
   const savedUser = localStorage.getItem('userData')
-  if(token){
+  if(token && savedUser){
     setIsAuthenticated(true);
     setUser(JSON.parse(savedUser))
     console.log(isAuthenticated)
