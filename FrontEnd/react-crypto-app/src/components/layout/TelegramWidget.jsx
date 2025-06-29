@@ -29,7 +29,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
       {
       localStorage.setItem('jwt', data.token);
       setIsAuthenticated(true);
-      //window.location.reload();
+      window.location.reload();
       } 
       else 
       {
