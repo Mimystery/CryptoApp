@@ -22,16 +22,6 @@ namespace CryptoApp.API.Extensions
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey))
                     };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            context.Token = context.Request.Cookies["first-cookies"];
-
-                            return Task.CompletedTask;
-                        }
-                    };
                 });
             services.AddAuthentication();
         }
