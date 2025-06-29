@@ -52,8 +52,8 @@ console.log("User from context:" + user.id);
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     <TelegramWidget />
     <img
-  src={user?.photo_url}
-  alt={user?.username}
+  src={userData?.photo_url}
+  alt={userData?.first_name}
   onError={(e) => {
     e.target.onerror = null;
     e.target.src = '/default-avatar.png'; // путь к твоей дефолтной аватарке
