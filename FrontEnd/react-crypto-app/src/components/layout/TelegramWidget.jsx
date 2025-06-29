@@ -9,7 +9,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
     // Глобальная функция, которую вызывает Telegram
     window.onTelegramAuth = function (user) {
       console.log(user)
-      localStorage.setItem('userDate', JSON.stringify(user));
+      localStorage.setItem('userData', JSON.stringify(user));
       setUser(user)
 
       fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
