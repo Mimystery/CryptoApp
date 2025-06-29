@@ -52,8 +52,10 @@ console.log("User from context:" + user?.id);
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     {!isAuthenticated && <TelegramWidget />}
-    <img src={userAvatar}></img>
-    <span>{userData?.first_name}</span>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <img src={userAvatar}></img>
+      <span>{userData?.first_name}</span>
+    </div>
     <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
 
