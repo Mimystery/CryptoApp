@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { CryptoContext } from '../../context/crypto-context';
 import AddCoinForm from './AddCoinForm';
 import TelegramWidget from './TelegramWidget';
+import userAvatar from '../../assets/default_avatar.png';
 
 const headerStyle = {
   width: '100%',
@@ -51,7 +52,7 @@ console.log("User from context:" + user.id);
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     <TelegramWidget />
-    <img src='/default-user.png'></img>
+    <img src={userAvatar}></img>
     <span>{userData.first_name}</span>
     <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
