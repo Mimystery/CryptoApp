@@ -32,7 +32,6 @@ useEffect(() =>{
 }, [])
 
   useEffect(() => {
-    if (!isAuthenticated) return;
     
     const fetchCryptoPrice = async () =>{
         let prices = await fetchPrice();
@@ -56,10 +55,9 @@ useEffect(() =>{
     const interval = setInterval(fetchCryptoPrice, 2000); 
 
     return () => clearInterval(interval); 
-  }, [isAuthenticated]);
+  }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
@@ -69,7 +67,7 @@ useEffect(() =>{
 
     }
     fetchCryptoSelect()
-  }, [isAuthenticated]);
+  }, []);
 
 
     return(

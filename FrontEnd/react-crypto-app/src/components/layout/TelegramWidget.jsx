@@ -48,7 +48,7 @@ const { setIsAuthenticated, setUser } = useContext(CryptoContext)
     script.setAttribute('data-size', 'medium');
     script.setAttribute('data-radius', '10');
     script.setAttribute('data-request-access', 'write');
-    script.setAttribute('data-onauth', 'onTelegramAuth');
+    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
 
     const container = document.getElementById('telegram-login');
     if (container) {
