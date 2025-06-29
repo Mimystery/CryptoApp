@@ -23,15 +23,15 @@ namespace CryptoApp.API.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey))
                     };
 
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            context.Token = context.Request.Cookies["first-cookies"];
+                    //options.Events = new JwtBearerEvents
+                    //{
+                    //    OnMessageReceived = context =>
+                    //    {
+                    //        context.Token = context.Request.Cookies["first-cookies"];
 
-                            return Task.CompletedTask;
-                        }
-                    };
+                    //        return Task.CompletedTask;
+                    //    }
+                    //};
                 });
             services.AddAuthentication();
         }

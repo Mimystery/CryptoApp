@@ -16,7 +16,7 @@ const { setIsAuthenticated, setUser, setLoading } = useContext(CryptoContext)
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify(user),
       })
         .then((res) => res.json())

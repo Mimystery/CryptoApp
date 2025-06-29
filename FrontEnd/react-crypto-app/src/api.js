@@ -37,14 +37,12 @@ export const fetchCryptoWallet = async () =>{
 }
 
 export const fetchSelectCoins = async () => {
-  const { isAuthenticated } = useContext(CryptoContext)
-  if(!isAuthenticated)
   try 
     {
       const token = localStorage.getItem('jwt');
       const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`,{
       method: 'GET',
-      credentials: 'include',
+      // credentials: 'include',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
