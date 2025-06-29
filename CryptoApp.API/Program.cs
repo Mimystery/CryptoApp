@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowRender", policy =>
     {
-        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com/") 
+        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com") 
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); 
