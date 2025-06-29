@@ -26,8 +26,10 @@ const handleSelect = (value) =>{
 }
 
 //console.log(isAuthenticated);
-const userData = localStorage.getItem('userData')
+const userDataRaw = localStorage.getItem('userData')
+const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
 console.log("Header user:" + userData.id);
+
     return(
     <Layout.Header style={headerStyle}>
     <Select
