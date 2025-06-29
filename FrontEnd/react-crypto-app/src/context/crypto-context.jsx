@@ -23,6 +23,7 @@ const [user, setUser] = useState(null);
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
   const savedUser = localStorage.getItem('userData')
+  console.log("Context:" + savedUser);
   if(token && savedUser){
     setIsAuthenticated(true);
     setUser(JSON.parse(savedUser))
