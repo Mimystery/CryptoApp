@@ -27,7 +27,6 @@ const handleSelect = (value) =>{
 
 console.log(isAuthenticated);
 const userData = localStorage.getItem('userData')
-console.log("Header user:" + userData);
     return(
     <Layout.Header style={headerStyle}>
     <Select
@@ -47,9 +46,15 @@ console.log("Header user:" + userData);
     />
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-    <TelegramWidget />
-    <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
-  </div>
+      {!isAuthenticated && <TelegramWidget />}
+      {isAuthenticated && (
+        <>
+          <img src={userData?.photo_url} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%' }} />
+          <span>{userData?.first_name}</span>
+          <Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>
+        </>
+      )}
+    </div>
 
   <Drawer
     width={'20%'}
