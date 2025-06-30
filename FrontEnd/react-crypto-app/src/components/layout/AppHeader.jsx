@@ -56,18 +56,18 @@ console.log("User from context:" + user?.id);
       <img src={userAvatar}></img>
       <span style={{ fontWeight: '600', fontSize: '16px', color: '#333' }}>{userData?.first_name}</span>
     </div>}
-    <>{!isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
+    <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
 
   <Drawer
-    width={'20%'}
+    width={'30%'}
     title="Add Coin"
     closable={{ 'aria-label': 'Close Button' }}
     onClose={() => setDrawer(false)}
     open={drawer}
     padding={'0rem'}
     destroyOnHidden>
-    <AddCoinForm />
+    <AddCoinForm onClose={() => setDrawer(false)}/>
   </Drawer>
 
     </Layout.Header>

@@ -71,7 +71,7 @@ useEffect(() =>{
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
-    //if (!isInitialized || !isAuthenticated) return;
+    if (!isInitialized || !isAuthenticated) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
@@ -83,10 +83,14 @@ useEffect(() =>{
     fetchCryptoSelect()
   }, [isAuthenticated, isInitialized]);
 
+  const addCoin = (newCoin) =>{
+    setWallet((prev) => [...prev, newCoin])
+  }
+
 
     return(
     <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated, 
-    setIsAuthenticated, user, setUser, setLoading}}>
+    setIsAuthenticated, user, setUser, setLoading, addCoin}}>
         {children}
     </CryptoContext.Provider>
     )

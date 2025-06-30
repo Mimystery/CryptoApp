@@ -1,13 +1,43 @@
-import { useState, useContext } from "react"
-import { Divider, Flex, Select, Space, Typography, Form, Input } from "antd"
+import { useState, useContext, useRef } from "react"
+import { Divider, Flex, Select, Space, Typography, Form, Input, 
+  InputNumber, Button, DatePicker, Result } from "antd"
 import { CryptoContext } from '../../context/crypto-context';
+import CoinLabel from "./CoinLabel";
 
-export default function AddCoinForm(){
+
+const validateMessages = {
+  required: '${label} is required!',
+  types:{
+    number: '${label} is not valid number'
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}'
+  }
+};
+
+export default function AddCoinForm({onClose}){
+const [form] = Form.useForm()
 const [coin, setCoin] = useState(null)
-const {selectCoins} = useContext(CryptoContext)
+const {selectCoins, addCoin} = useContext(CryptoContext)
+const [submitted, setSubmit] = useState(false)
+const coinRef = useRef()
 
 const handleSelect = (value) =>{
   console.log(value)
+}
+
+if(submitted){
+  return (<Result
+    status="success"
+    title="Successfully added new coin to your wallet!"
+    subTitle={`Added ${coinRef.current.amount} of ${coin.name} 
+    by price ${coinRef.current.price} to your wallet`}
+    extra={[
+      <Button type="primary" key="console" onClick={onClose}>
+        Close
+      </Button>,
+    ]}
+  />)
 }
 
 if(!coin){
@@ -30,44 +60,86 @@ if(!coin){
     )
 }
 
+const onFinish = (values) =>{
+  console.log(values)
+  const newCoin = {
+    id: coin.id,
+    symbol: coin.symbol,
+    amount: values.amount,
+    price: values.price,
+    date: values.date?.$d ?? new Date(),
+  }
+  console.log(newCoin)
+  coinRef.current = newCoin
+  setSubmit(true)
+  addCoin(newCoin)
+}
+
+const updateTotal = () => {
+  const amount = form.getFieldValue('amount') || 0
+  const price = form.getFieldValue('price') || 0
+  form.setFieldsValue({
+    total: +(amount * price).toFixed(2),
+  })
+}
+
   return(
     <Form
+    form={form}
       name="basic"
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 10 }}
       style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
+      initialValues={{}}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off">
-            <Flex align="center">
-                <img src={coin.imageUrl} alt={coin.name} style={{width: 40, marginRight: 10}}/>
-                <Typography.Title level={2} style={{margin: 0}}>
-                    {coin.name}
-                </Typography.Title>
-            </Flex>
-            <Divider/>
+      validateMessages={validateMessages}>
+        <CoinLabel coin={coin}/>
+        <Divider/>
     <Form.Item
-      label="Username"
-      name="username"
-      rules={[{ required: true, message: 'Please input your username!' }]}
+      label="Amount"
+      name="amount"
+      rules={[{ 
+        required: true, 
+        type: 'number',
+        min: 0,
+      }]}
+      style={{ width: '100%', marginRight: '1rem' }}
     >
-      <Input />
+      <InputNumber onChange={updateTotal} placeholder="Enter coin amount" style={{ width: '100%' }} 
+      parser={(value) => value.replace(',', '.').replace(/[^\d.]/g, '')}/>
     </Form.Item>
 
     <Form.Item
-      label="Password"
-      name="password"
-      rules={[{ required: true, message: 'Please input your password!' }]}
+      label="Price"
+      name="price"
+      rules={[{ 
+        required: true, 
+        type: 'number',
+        min: 0,
+
+        }]}
+        style={{ width: '100%'}}
     >
-      <Input.Password />
+      <InputNumber onChange={updateTotal} placeholder="Enter coin price" style={{ width: '100%' }} step={0.01}/>
     </Form.Item>
 
-    <Form.Item name="remember" valuePropName="checked" label={null}>
-      <Checkbox>Remember me</Checkbox>
+    <Form.Item
+      label="Date"
+      name="date"
+        style={{ width: '100%' }}
+    >
+      <DatePicker showTime style={{ width: '100%' }}/>
     </Form.Item>
 
-    <Form.Item label={null}>
+    <Form.Item
+      label="Total"
+      name="total"
+    >
+      <InputNumber disabled style={{ width: '100%' }}/>
+    </Form.Item>
+
+
+    <Form.Item>
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

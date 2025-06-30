@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoApp.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CoinController : ControllerBase
@@ -56,7 +56,7 @@ namespace CryptoApp.API.Controllers
             }
         }
 
-       // [Authorize]
+        [Authorize]
         [HttpGet("list")]
         public async Task<ActionResult<List<Coin>>> GetCoinList()
         {
