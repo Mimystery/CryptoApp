@@ -19,20 +19,20 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
     return(
       <Layout.Sider width="15%" style={siderStyle}>
 
-      {!isAuthenticated && (
+      {!isAuthenticated ? (
         <Card style={{ width: '100%', marginBottom: '1rem' }}>
         <Typography.Text strong>
-          У вас пока нет криптовалюты. Купите крипту 🪙
+          Login to check your profit
         </Typography.Text>
-      </Card>)}
-
-        {wallet.length === 0 ? (
+      </Card>) : (
+        <>
+      {wallet.length === 0 ? (
       <Card style={{ width: '100%', marginBottom: '1rem' }}>
         <Typography.Text strong>
-          У вас пока нет криптовалюты. Купите крипту 🪙
+          You dont have any coins yet
         </Typography.Text>
       </Card>
-    ) : (
+      ) : (
       wallet.map(coin => (
         <Card key={coin.symbol} style={{ width: '100%', marginBottom: '1rem' }}>
           <Statistic 
@@ -60,8 +60,9 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
               </List.Item>
             )}/>
         </Card>
-      ))
-    )}
+        ))
+      )}
+        </>)}
       </Layout.Sider>
     )
 }
