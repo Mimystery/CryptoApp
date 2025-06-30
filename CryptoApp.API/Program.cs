@@ -60,6 +60,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalHost", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173/")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        //.AllowCredentials(); 
+    });
+});
+
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 
 builder.Services.AddDbContext<CoinsDbContext>(options =>
@@ -85,6 +96,7 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 app.UseCors("AllowRender");
+app.UseCors("AllowLocalHost");
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
