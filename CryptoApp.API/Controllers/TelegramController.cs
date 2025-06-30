@@ -37,5 +37,15 @@ namespace CryptoApp.API.Controllers
 
             return Ok(new {token});
         }
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<TelegramUser>> GetTelegramUser(int id)
+        {
+            var user = await _tgUserService.GetTelegramUserById(id);
+            if (user == null)
+            {
+                return NotFound("Telegram user not found");
+            }
+            return Ok(user);
+        }
     }
 }
