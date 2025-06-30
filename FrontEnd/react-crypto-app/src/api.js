@@ -40,7 +40,7 @@ export const fetchSelectCoins = async () => {
   try 
     {
       const token = localStorage.getItem('jwt');
-      console.log("Token if method fetchSelectCoins:  " + {token})
+      console.log("Token in method fetchSelectCoins:  " + token)
       const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`,{
       method: 'GET',
       // credentials: 'include',
