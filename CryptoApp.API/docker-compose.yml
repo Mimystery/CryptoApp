@@ -23,6 +23,7 @@ services:
      depends_on:
      - postgres
      environment:
+     - JwtOptions__ExpiresHours=168
      - JwtOptions__SecretKey=cryptoappWnRpptcweQusavbmaoWismxcryptoappWnRpptcweQusavbmaoWismx
      - ASPNETCORE_ENVIRONMENT=Development
 

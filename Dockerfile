@@ -25,6 +25,7 @@ WORKDIR /app
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://+:5000
 ENV JwtOptions__SecretKey=cryptoappWnRpptcweQusavbmaoWismxcryptoappWnRpptcweQusavbmaoWismx
+ENV JwtOptions__ExpiresHours=168
 
 COPY --from=build /app/publish .
 
