@@ -56,7 +56,7 @@ namespace CryptoApp.API.Controllers
             }
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpGet("list")]
         public async Task<ActionResult<List<Coin>>> GetCoinList()
         {
