@@ -35,6 +35,9 @@ useEffect(() =>{
   }
   else{
     setIsAuthenticated(false);
+    setUser(null)
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('userData')
   }
 
   setIsInitialized(true)
