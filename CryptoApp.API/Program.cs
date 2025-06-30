@@ -28,7 +28,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com") 
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials(); 
+            //.AllowCredentials(); 
     });
 });
 
@@ -56,7 +56,7 @@ builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
-
+app.UseCors("AllowRender");
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
@@ -75,7 +75,6 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("AllowRender");
 
 app.UseHttpsRedirection();
 
