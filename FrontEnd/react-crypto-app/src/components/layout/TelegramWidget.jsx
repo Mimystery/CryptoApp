@@ -7,10 +7,10 @@ const { setIsAuthenticated, setUser, setLoading } = useContext(CryptoContext)
 
   useEffect(() => {
     window.onTelegramAuth = function (user) {
+      setLoading(true)
       console.log(user)
       localStorage.setItem('userData', JSON.stringify(user));
       setUser(user)
-      setLoading(true)
       fetch('https://cryptoapp-foee.onrender.com/api/Telegram/auth', {
         method: 'POST',
         headers: {
