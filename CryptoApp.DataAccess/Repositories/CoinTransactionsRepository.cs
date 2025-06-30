@@ -17,6 +17,6 @@ namespace CryptoApp.DataAccess.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<>
+        //public async Task<>
     }
 }
