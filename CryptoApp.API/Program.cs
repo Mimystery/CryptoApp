@@ -6,6 +6,7 @@ using CryptoApp.DataAccess.Repositories;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,34 @@ builder.Configuration
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "¬ведите JWT токен как: Bearer {token}",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 builder.Services.AddHttpClient();
 
@@ -25,10 +53,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowRender", policy =>
     {
-        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com") 
+        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com")
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            //.AllowCredentials(); 
+            .AllowAnyMethod();
+        //.AllowCredentials(); 
     });
 });
 
