@@ -14,67 +14,18 @@ const siderStyle = {
 };
 
 export default function AppSider(){
-const {prices, wallet, loading} = useContext(CryptoContext)
-
-    // return(
-    //     <Layout.Sider width="25%" style={siderStyle}>
-    //       <h2>Price list on top 5 COINS (USDT):</h2>
-    //         {loading ? (
-    //     <p>Loading...</p>
-    //   ) : (
-    //     <ul>
-    //       {prices.map(p => {
-    //         const formatted = new Intl.NumberFormat('de-DE', {
-    //             minimumFractionDigits: 2, 
-    //             maximumFractionDigits: 2
-    //         }).format(p.price);
-    //         return (
-    //           <li key={p.symbol}>
-    //             {p.symbol}: {formatted} USDT
-    //           </li>
-    //         );
-    //       })}
-    //     </ul>
-    //   )}
-    //     </Layout.Sider>
-    // )
-
-
-
-    // return(
-    //     <Layout.Sider width="25%" style={siderStyle}>
-    //         <Card style={{ width: '100%', marginBottom: '1rem'}}>
-    //             <Statistic title="Active"
-    //               value={11.28}
-    //               precision={2}
-    //               prefix={<ArrowUpOutlined />}
-    //               valueStyle={{ color: '#3f8600' }}
-    //               suffix="%"/>
-    //       <List
-    //         size='small'
-    //         dataSource={wallet}
-    //         renderItem={coin => (
-    //           <List.Item>
-    //             <Typography.Text strong>{coin.symbol}</Typography.Text>: {(coin.totalProfit).toFixed(2)}
-    //           </List.Item>
-    //         )}/>
-    //         </Card>
-
-    //         <Card style={{ width: '100%'}}>
-    //             <Statistic
-    //       title="Idle"
-    //       value={9.3}
-    //       precision={2}
-    //       valueStyle={{ color: '#cf1322' }}
-    //       prefix={<ArrowDownOutlined />}
-    //       suffix="%"
-    //     />
-    //         </Card>
-    //     </Layout.Sider>
-    // )
+const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
 
     return(
       <Layout.Sider width="15%" style={siderStyle}>
+
+      {!isAuthenticated && (
+        <Card style={{ width: '100%', marginBottom: '1rem' }}>
+        <Typography.Text strong>
+          У вас пока нет криптовалюты. Купите крипту 🪙
+        </Typography.Text>
+      </Card>)}
+
         {wallet.length === 0 ? (
       <Card style={{ width: '100%', marginBottom: '1rem' }}>
         <Typography.Text strong>
