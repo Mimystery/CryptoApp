@@ -19,6 +19,8 @@ namespace CryptoApp.Application.Authentication
         public JwtService(IOptions<JwtOptions> options)
         {
             _options = options.Value;
+            Console.WriteLine($"JwtOptions.SecretKey = {_options.SecretKey}");
+            Console.WriteLine($"JwtOptions.ExpiresHours = {_options.ExpiresHours}");
         }
 
         public string GenerateToken(TelegramUser tgUser)
@@ -35,6 +37,8 @@ namespace CryptoApp.Application.Authentication
 
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)), SecurityAlgorithms.HmacSha256);
+            var expiration = DateTime.UtcNow.AddHours(_options.ExpiresHours);
+            Console.WriteLine($"Token expiration: {expiration} (ExpiresHours: {_options.ExpiresHours})");
 
             var token = new JwtSecurityToken(
                 expires: DateTime.UtcNow.AddHours(_options.ExpiresHours),
