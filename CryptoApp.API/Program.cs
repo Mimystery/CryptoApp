@@ -54,7 +54,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFront", policy =>
     {
         policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com",
-                "http://localhost:5173/")
+                "http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod();
         //.AllowCredentials(); 
