@@ -22,10 +22,12 @@ const [user, setUser] = useState(null);
 const [isInitialized, setIsInitialized] = useState(false);
 
 useEffect(() =>{
-  //const token = localStorage.getItem('jwt');
-  //const savedUser = localStorage.getItem('userData')
-  //console.log("Context:" + savedUser);
-  //console.log('Token context:' + token);
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("userData");
+  const token = localStorage.getItem('jwt');
+  const savedUser = localStorage.getItem('userData')
+  console.log("Context:" + savedUser);
+  console.log('Token context:' + token);
   if(token && savedUser){
     setIsAuthenticated(true);
     setUser(JSON.parse(savedUser))
