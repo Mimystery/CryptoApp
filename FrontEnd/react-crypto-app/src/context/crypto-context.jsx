@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import { fetchCryptoWallet, fetchPrice, fetchSelectCoins } from '../api';
-import { percentDifference } from '../utils'
+import { isTokenExpired, percentDifference } from '../utils'
 
 export const CryptoContext = createContext({
     wallet: [],
@@ -26,7 +26,8 @@ useEffect(() =>{
   const savedUser = localStorage.getItem('userData')
   console.log("Context:" + savedUser);
   console.log('Token context:' + token);
-  if(token && savedUser){
+  isTokenExpired(token)
+  if(!isTokenExpired(token) && token && savedUser){
     setIsAuthenticated(true);
     setUser(JSON.parse(savedUser))
     console.log(isAuthenticated)
