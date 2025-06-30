@@ -21,9 +21,6 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [user, setUser] = useState(null);
 const [isInitialized, setIsInitialized] = useState(false);
 
-  localStorage.removeItem("jwt");
-  localStorage.removeItem("userData");
-
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
   const savedUser = localStorage.getItem('userData')
