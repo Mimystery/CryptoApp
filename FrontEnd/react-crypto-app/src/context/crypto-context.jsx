@@ -66,11 +66,12 @@ useEffect(() =>{
   }, []);
 
   useEffect(() => {
+    const token = localStorage.getItem('jwt');
     if (!isAuthenticated && !isInitialized) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
-        let selectCoins = await fetchSelectCoins();
+        let selectCoins = await fetchSelectCoins(token);
         setSelectCoins(selectCoins)
         setLoading(false)
 
