@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoApp.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CoinController : ControllerBase
