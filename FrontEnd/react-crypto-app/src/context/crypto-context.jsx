@@ -19,6 +19,7 @@ const [loading, setLoading] = useState(true);
 const [selectCoins, setSelectCoins] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [user, setUser] = useState(null);
+const [isInitialized, setIsInitialized] = useState(false);
 
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
@@ -34,6 +35,8 @@ useEffect(() =>{
   else{
     setIsAuthenticated(false);
   }
+
+  setIsInitialized(true)
 }, [])
 
   useEffect(() => {
@@ -63,7 +66,7 @@ useEffect(() =>{
   }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated && !isInitialized) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
@@ -73,7 +76,7 @@ useEffect(() =>{
 
     }
     fetchCryptoSelect()
-  }, [isAuthenticated]);
+  }, [isAuthenticated, isInitialized]);
 
 
     return(
