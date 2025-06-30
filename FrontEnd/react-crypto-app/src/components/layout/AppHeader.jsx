@@ -56,7 +56,7 @@ console.log("User from context:" + user?.id);
       <img src={userAvatar}></img>
       <span style={{ fontWeight: '600', fontSize: '16px', color: '#333' }}>{userData?.first_name}</span>
     </div>}
-    <>{isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
+    <>{!isAuthenticated && (<Button type="primary" onClick={() => setDrawer(true)}>Add coin</Button>)}</>
   </div>
 
   <Drawer

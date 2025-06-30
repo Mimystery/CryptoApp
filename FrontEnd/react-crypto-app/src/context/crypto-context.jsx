@@ -71,7 +71,7 @@ useEffect(() =>{
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
-    if (!isInitialized || !isAuthenticated) return;
+    //if (!isInitialized || !isAuthenticated) return;
 
     const fetchCryptoSelect = async () => {
         setLoading(true)
