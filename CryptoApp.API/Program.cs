@@ -51,20 +51,10 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowRender", policy =>
+    options.AddPolicy("AllowFront", policy =>
     {
-        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-        //.AllowCredentials(); 
-    });
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowLocalHost", policy =>
-    {
-        policy.WithOrigins("http://localhost:5173/")
+        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com",
+                "http://localhost:5173/")
             .AllowAnyHeader()
             .AllowAnyMethod();
         //.AllowCredentials(); 
@@ -95,8 +85,7 @@ builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
-app.UseCors("AllowRender");
-app.UseCors("AllowLocalHost");
+app.UseCors("AllowFront");
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
