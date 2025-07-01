@@ -52,12 +52,10 @@ builder.Services.AddHttpClient();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFront", policy =>
-    {
-        policy.WithOrigins("https://cryptoapp-1-dsnm.onrender.com",
-                "http://localhost:5173")
+    { 
+        policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
-        //.AllowCredentials(); 
     });
 });
 
@@ -85,6 +83,7 @@ builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 app.UseCors("AllowFront");
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
@@ -104,8 +103,6 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
 
 //app.UseCookiePolicy(new CookiePolicyOptions
 //{
