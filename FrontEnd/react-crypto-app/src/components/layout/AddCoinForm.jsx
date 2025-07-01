@@ -59,7 +59,7 @@ if(!coin){
   />
     )
 }
-
+console.log(coin)
 const onFinish = (values) =>{
   console.log(values)
   const newCoin = {
@@ -84,7 +84,7 @@ const updateTotal = () => {
     total: +(amount * price).toFixed(2),
   })
 }
-console.log(coin.price)
+console.log(coin)
   return(
     <Form
     form={form}
