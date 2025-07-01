@@ -57,6 +57,14 @@ namespace CryptoApp.API.Controllers
         public async Task<ActionResult> AddTransaction(int telegramUserId,
             [FromBody] CoinTransactionRequest coinTransaction)
         {
+            if (coinTransaction == null)
+            {
+                return BadRequest("coinTransaction is null");
+            }
+
+            // Логирование всех полей:
+            Console.WriteLine($"Received transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}");
+
             await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
 
             return Ok("Transaction added successfully");

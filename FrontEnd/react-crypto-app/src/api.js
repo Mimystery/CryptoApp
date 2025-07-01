@@ -66,6 +66,7 @@ export const addTransaction = async (coin) => {
   const user = JSON.parse(localStorage.getItem('userData'))
   try 
     {
+      console.log("Отправляем на сервер:", coin);
       var response = await axios.post(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/transaction`, coin)
       return response.status
     }
