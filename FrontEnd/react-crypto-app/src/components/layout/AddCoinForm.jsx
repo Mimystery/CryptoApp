@@ -93,7 +93,8 @@ console.log(prices)
       wrapperCol={{ span: 10 }}
       style={{ maxWidth: 600 }}
       initialValues={{
-        price: coin.price,
+        price: +(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
+      coin.symbol.toLowerCase().price).toFixed(2))
       }}
       onFinish={onFinish}
       validateMessages={validateMessages}>
