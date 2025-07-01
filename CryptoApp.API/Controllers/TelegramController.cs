@@ -64,10 +64,6 @@ namespace CryptoApp.API.Controllers
         public async Task<ActionResult<List<CoinTransaction>>> GetTransactionsByTelegramUserId(int telegramUserId)
         {
             var transactions = await _tgUserService.GetTransactionsByTelegramUserId(telegramUserId);
-            if (transactions == null || !transactions.Any())
-            {
-                return NotFound("No transactions found for this user");
-            }
 
             return Ok(transactions);
         }
