@@ -52,16 +52,15 @@ namespace CryptoApp.API.Controllers
             return Ok(user);
         }
 
-        [HttpPost("user/{id}/transaction")]
-        public async Task<ActionResult> AddTransaction(int telegramUserId,
-            [FromBody] CoinTransactionRequest coinTransaction)
+        [HttpPost("user/{telegramUserId}/transaction")]
+        public async Task<ActionResult> AddTransaction(int telegramUserId, [FromBody] CoinTransactionRequest coinTransaction)
         {
             await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
 
             return Ok("Transaction added successfully");
         }
 
-        [HttpGet("user/{id}/transaction")]
+        [HttpGet("user/{telegramUserId}/transaction")]
         public async Task<ActionResult<List<CoinTransaction>>> GetTransactionsByTelegramUserId(int telegramUserId)
         {
             var transactions = await _tgUserService.GetTransactionsByTelegramUserId(telegramUserId);
@@ -73,7 +72,7 @@ namespace CryptoApp.API.Controllers
             return Ok(transactions);
         }
 
-        [HttpGet("user/{id}/summary")]
+        [HttpGet("user/{telegramUserId}/summary")]
         public async Task<ActionResult<List<CoinSummaryResponse>>> GetSummaryOnEveryCoin(int telegramUserId)
         {
             var summary = await _tgUserService.GetSummaryOnEveryCoin(telegramUserId);
