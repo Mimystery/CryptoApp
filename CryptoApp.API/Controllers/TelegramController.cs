@@ -2,6 +2,7 @@
 using CryptoApp.Application.Services;
 using CryptoApp.Core.Contracts;
 using CryptoApp.Core.Models;
+using CryptoApp.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,14 +30,16 @@ namespace CryptoApp.API.Controllers
             {
                 return Unauthorized("Invalid data");
             }
+
             var mappedData = _mapper.Map<TelegramUser>(data);
 
             var token = await _tgUserService.LoginTelegramUser(mappedData);
 
             //_httpContext.HttpContext.Response.Cookies.Append("first-cookies", token);
 
-            return Ok(new {token});
+            return Ok(new { token });
         }
+
         [HttpGet("user/{id}")]
         public async Task<ActionResult<TelegramUser>> GetTelegramUser(int id)
         {
@@ -45,7 +48,41 @@ namespace CryptoApp.API.Controllers
             {
                 return NotFound("Telegram user not found");
             }
+
             return Ok(user);
+        }
+
+        [HttpPost("user/{id}")]
+        public async Task<ActionResult> AddTransaction(int telegramUserId,
+            [FromBody] CoinTransactionRequest coinTransaction)
+        {
+            await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
+
+            return Ok("Transaction added successfully");
+        }
+
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<List<CoinTransaction>>> GetTransactionsByTelegramUserId(int telegramUserId)
+        {
+            var transactions = await _tgUserService.GetTransactionsByTelegramUserId(telegramUserId);
+            if (transactions == null || !transactions.Any())
+            {
+                return NotFound("No transactions found for this user");
+            }
+
+            return Ok(transactions);
+        }
+
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<List<CoinSummaryResponse>>> GetSummaryOnEveryCoin(int telegramUserId)
+        {
+            var summary = await _tgUserService.GetSummaryOnEveryCoin(telegramUserId);
+            if (summary == null || !summary.Any())
+            {
+                return NotFound("No coin summary found for this user");
+            }
+
+            return Ok(summary);
         }
     }
 }

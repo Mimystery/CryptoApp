@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CryptoApp.Core.Contracts;
 using CryptoApp.Core.Models;
+using CryptoApp.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,45 @@ namespace CryptoApp.DataAccess.Repositories
                 LastName = telegramUser.LastName,
                 AuthDate = telegramUser.AuthDate,
                 Hash = telegramUser.Hash,
-                PhotoUrl = telegramUser.PhotoUrl
+                PhotoUrl = telegramUser.PhotoUrl,
             };
 
             await _context.TelegramUsers.AddAsync(telegramUserEntity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction)
+        {
+            var user = await _context.TelegramUsers.Include(u => u.Transactions).FirstOrDefaultAsync(u => u.Id == telegramUserId);
+
+            var transaction = new CoinTransactionEntity
+            {
+                Id = Guid.NewGuid().ToString(),
+                TelegramUserId = telegramUserId,
+                CoinId = coinTransaction.CoinId,
+                Symbol = coinTransaction.Symbol,
+                Name = coinTransaction.Name,
+                ImageUrl = coinTransaction.ImageUrl,
+                Amount = coinTransaction.Amount,
+                Price = coinTransaction.Price,
+                TransactionDate = coinTransaction.TransactionDate
+            };
+
+            if (user == null)
+            {
+                throw new InvalidOperationException($"Telegram user with ID {telegramUserId} does not exist.");
+            }
+
+            user.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<CoinTransaction>> GetTransactionsByUserId(int telegramUserId)
+        {
+            var transactions = await _context.CoinTransactions
+                .Where(t => t.TelegramUserId == telegramUserId).ToListAsync();
+            
+            return _mapper.Map<List<CoinTransaction>>(transactions);
         }
     }
 }

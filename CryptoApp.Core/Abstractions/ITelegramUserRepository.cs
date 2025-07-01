@@ -1,4 +1,5 @@
-﻿using CryptoApp.Core.Models;
+﻿using CryptoApp.Core.Contracts;
+using CryptoApp.Core.Models;
 
 namespace CryptoApp.DataAccess.Repositories
 {
@@ -6,5 +7,7 @@ namespace CryptoApp.DataAccess.Repositories
     {
         Task<TelegramUser> GetById(int id);
         Task Add(TelegramUser telegramUser);
+        Task AddTransaction(int telegramUserId, CoinTransactionRequest cointTransaction);
+        Task<List<CoinTransaction>> GetTransactionsByUserId(int telegramUserId);
     }
 }

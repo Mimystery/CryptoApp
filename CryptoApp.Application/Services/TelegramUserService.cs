@@ -21,6 +21,7 @@ namespace CryptoApp.Application.Services
             _tgUserRepository = tgUserRepository;
             _jwtService = jwtService;
         }
+
         public async Task<TelegramUser> GetTelegramUserById(int id)
         {
             return await _tgUserRepository.GetById(id);
@@ -75,6 +76,36 @@ namespace CryptoApp.Application.Services
             }
 
             await _tgUserRepository.Add(telegramUser);
+        }
+
+        public async Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction)
+        {
+            await _tgUserRepository.AddTransaction(telegramUserId, coinTransaction);
+        }
+
+        public async Task<List<CoinTransaction>> GetTransactionsByTelegramUserId(int telegramUserId)
+        {
+            return await _tgUserRepository.GetTransactionsByUserId(telegramUserId);
+        }
+
+        public async Task<List<CoinSummaryResponse>> GetSummaryOnEveryCoin(int telegramUserId)
+        {
+            var transactions = await _tgUserRepository.GetTransactionsByUserId(telegramUserId);
+            var summary = transactions
+                .GroupBy(t => t.Symbol)
+                .Select(s => new CoinSummaryResponse
+                {
+                    CoinId = s.First().CoinId,
+                    Symbol = s.Key,
+                    Name = s.First().Name,
+                    ImageUrl = s.First().ImageUrl,
+                    TotalAmount = s.Sum(t => t.Amount),
+                    AveragePrice = s.Average(t => t.Price),
+                    TotalCost = s.Sum(t => t.Amount * t.Price),
+                }).ToList();
+
+            return summary;
+
         }
     }
 }

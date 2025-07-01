@@ -16,6 +16,8 @@ namespace CryptoApp.Application.Mappings
         {
             CreateMap<CoinEntity, Coin>();
             CreateMap<Coin, CoinGeckoResponse>();
+            CreateMap<CoinTransactionRequest, CoinTransactionEntity>();
+            CreateMap<CoinTransactionEntity, CoinTransaction>();
         }
     }
 }
