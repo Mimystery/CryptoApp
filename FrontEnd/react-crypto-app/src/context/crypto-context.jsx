@@ -21,6 +21,17 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [user, setUser] = useState(null);
 const [isInitialized, setIsInitialized] = useState(false);
 
+const mapWallet = (wallet, prices) =>{
+  return wallet.map(walletCoin =>{
+    const coin = prices.find((c) => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol)
+    return {
+      grow: walletCoin.price < coin.price,
+      growPercent: percentDifference(walletCoin.price, coin.price),
+      ...walletCoin
+    }
+  })
+}
+
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
   const savedUser = localStorage.getItem('userData')
@@ -49,14 +60,7 @@ useEffect(() =>{
         let prices = await fetchPrice();
         let wallet = await fetchCryptoWallet();
 
-        setWallet(wallet.map(walletCoin => {
-          const coin = prices.find((c) => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol)
-          return {
-            grow: walletCoin.price < coin.price,
-            growPercent: percentDifference(walletCoin.price, coin.price),
-            ...walletCoin
-          }
-        }))
+        setWallet(mapWallet(wallet, prices))
         setPrices(prices)
         setLoading(false)
     }
@@ -82,9 +86,10 @@ useEffect(() =>{
   }, [isAuthenticated, isInitialized]);
 
   const addCoin = async (newCoin) => {
-    try{
-      await addTransaction(newCoin);
-    setWallet((prev) => [...prev, newCoin])
+    try
+    {
+    await addTransaction(newCoin);
+    setWallet((prev) => mapWallet([...prev, newCoin]), prices)
     }
     catch(error){
       console.error(error)
