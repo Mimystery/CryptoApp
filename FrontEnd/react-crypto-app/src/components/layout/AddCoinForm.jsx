@@ -85,6 +85,8 @@ const updateTotal = () => {
   })
 }
 console.log(coin.symbol)
+console.log(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
+      coin.symbol.toLowerCase()))
   return(
     <Form
     form={form}
