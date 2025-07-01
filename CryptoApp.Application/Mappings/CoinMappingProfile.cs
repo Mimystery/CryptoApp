@@ -17,7 +17,9 @@ namespace CryptoApp.Application.Mappings
             CreateMap<CoinEntity, Coin>();
             CreateMap<Coin, CoinGeckoResponse>();
             CreateMap<CoinTransactionRequest, CoinTransactionEntity>();
-            CreateMap<CoinTransactionEntity, CoinTransaction>();
+            CreateMap<CoinTransactionEntity, CoinTransaction>().ConstructUsing(ent => new CoinTransaction(
+                ent.Id, ent.TelegramUserId, ent.CoinId, ent.Symbol, ent.Name, ent.ImageUrl, ent.Amount, ent.Price,
+                ent.TransactionDate));
         }
     }
 }

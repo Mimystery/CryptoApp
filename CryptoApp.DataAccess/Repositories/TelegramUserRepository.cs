@@ -93,7 +93,7 @@ namespace CryptoApp.DataAccess.Repositories
                     Console.Error.WriteLine(dbEx.InnerException.Message);
                 }
 
-                throw; // Проброс исключения дальше (если нужно, можно изменить на возврат ошибки)
+                throw; 
             }
             catch (Exception ex)
             {
