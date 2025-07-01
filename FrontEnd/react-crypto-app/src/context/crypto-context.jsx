@@ -24,6 +24,7 @@ const [isInitialized, setIsInitialized] = useState(false);
 const mapWallet = (wallet, prices) =>{
   if (!Array.isArray(wallet) || !Array.isArray(prices)) return [];
   console.log(prices)
+  console.log(wallet)
   return wallet.map(walletCoin => {
     const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol.toLowerCase());
     const currentPrice = parseFloat(coin.price)
