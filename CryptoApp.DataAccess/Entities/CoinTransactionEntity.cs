@@ -9,7 +9,7 @@ namespace CryptoApp.DataAccess.Entities
 {
     public class CoinTransactionEntity
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public int TelegramUserId { get; set; }
         public TelegramUserEntity User { get; set; }
         public string CoinId { get; set; }

@@ -79,8 +79,9 @@ namespace CryptoApp.DataAccess.Migrations
 
             modelBuilder.Entity("CryptoApp.DataAccess.Entities.CoinTransactionEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<double>("Amount")
                         .HasColumnType("double precision");

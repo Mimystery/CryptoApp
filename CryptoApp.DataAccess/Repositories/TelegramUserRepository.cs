@@ -54,7 +54,7 @@ namespace CryptoApp.DataAccess.Repositories
 
             var transaction = new CoinTransactionEntity
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 TelegramUserId = telegramUserId,
                 CoinId = coinTransaction.CoinId,
                 Symbol = coinTransaction.Symbol,
@@ -70,7 +70,6 @@ namespace CryptoApp.DataAccess.Repositories
                 throw new InvalidOperationException($"Telegram user with ID {telegramUserId} does not exist.");
             }
 
-            user.Transactions.Add(transaction);
             _context.CoinTransactions.Add(transaction);
             await _context.SaveChangesAsync();
         }
@@ -82,7 +81,7 @@ namespace CryptoApp.DataAccess.Repositories
             
             return _mapper.Map<List<CoinTransaction>>(transactions);
         }
-        public async Task DeleteTransaction(string transactionId)
+        public async Task DeleteTransaction(Guid transactionId)
         {
             var transaction = await _context.CoinTransactions
                 .FirstOrDefaultAsync(t => t.Id == transactionId);

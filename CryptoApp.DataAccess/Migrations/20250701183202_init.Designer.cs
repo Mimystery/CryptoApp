@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CryptoApp.DataAccess.Migrations
 {
     [DbContext(typeof(CoinsDbContext))]
-    [Migration("20250628191102_init2")]
-    partial class init2
+    [Migration("20250701183202_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,8 +82,9 @@ namespace CryptoApp.DataAccess.Migrations
 
             modelBuilder.Entity("CryptoApp.DataAccess.Entities.CoinTransactionEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<double>("Amount")
                         .HasColumnType("double precision");

@@ -12,7 +12,7 @@ namespace CryptoApp.Application.Services
         Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction);
         Task<List<CoinTransaction>> GetTransactionsByTelegramUserId(int telegramUserId);
         Task<List<CoinSummaryResponse>> GetSummaryOnEveryCoin(int telegramUserId);
-        Task DeleteTransactionById(string transactionid);
+        Task DeleteTransactionById(Guid transactionid);
         Task DeleteNullIdTransactions(int userId);
     }
 }
