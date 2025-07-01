@@ -28,6 +28,7 @@ const mapWallet = (wallet, prices) =>{
     return {
       grow: coin ? walletCoin.price < coin.price : false,
       growPercent: coin ? percentDifference(walletCoin.price, coin.price) : 0,
+      totalProfit: (coin.price - walletCoin.averagePrice) * walletCoin.totalAmount,
       ...walletCoin
     };
   })

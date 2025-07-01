@@ -47,8 +47,8 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
             size='small'
             dataSource={[
               {title: 'Total Profit', value: coin.totalProfit, isDollar: true},
-              {title: 'Amount', value: coin.amount},
-              {title: 'Total Money', value: coin.totalMoney, isDollar: true},
+              {title: 'Amount', value: coin.totalAmount},
+              {title: 'Total Cost', value: coin.totalCost, isDollar: true},
             ]}
             renderItem={item => (
               <List.Item>
