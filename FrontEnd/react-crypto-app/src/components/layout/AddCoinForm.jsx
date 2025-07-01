@@ -74,7 +74,7 @@ const onFinish = (values) =>{
   console.log(newCoin)
   coinRef.current = newCoin
   setSubmit(true)
-  //addCoin(newCoin)
+  addCoin(newCoin)
 }
 
 const updateTotal = () => {
