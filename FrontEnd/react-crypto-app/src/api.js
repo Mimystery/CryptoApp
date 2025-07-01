@@ -22,7 +22,7 @@ export const fetchPrice = async () => {
 }
 
 export const fetchCryptoWallet = async () =>{
-const user = localStorage.getItem('userData')
+const user = JSON.parse(localStorage.getItem('userData'))
 console.log("User id from api;" + user?.id)
   try
   {
