@@ -26,8 +26,8 @@ const mapWallet = (wallet, prices) =>{
   return wallet.map(walletCoin => {
     const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol);
     return {
-      grow: coin ? walletCoin.price < coin.price : false,
-      growPercent: coin ? percentDifference(walletCoin.price, coin.price) : 0,
+      grow: walletCoin.price < coin.price,
+      growPercent: percentDifference(walletCoin.price, coin.price),
       totalProfit: (coin.price - walletCoin.averagePrice) * walletCoin.totalAmount,
       ...walletCoin
     };
