@@ -22,17 +22,15 @@ export const fetchPrice = async () => {
 }
 
 export const fetchCryptoWallet = async () =>{
+const {user} = useContext(CryptoContext)
   try
   {
-    return new Promise((resolve) => {
-      setTimeout(() => { 
-        resolve(cryptoWallet)
-      }, 1)
-    })
+    const wallet = await axios.get(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/summary`)
+    return wallet.data;
   }
   catch(e)
   { 
-    console.error("Ошибка при получении wallet:", error);
+    console.error("Ошибка при получении wallet:", e);
   }
 }
 

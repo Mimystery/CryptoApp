@@ -50,12 +50,10 @@ useEffect(() =>{
         let wallet = await fetchCryptoWallet();
 
         setWallet(wallet.map(walletCoin => {
-          const coin = prices.find((c) => c.symbol === walletCoin.symbol)
+          const coin = prices.find((c) => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol)
           return {
             grow: walletCoin.price < coin.price,
             growPercent: percentDifference(walletCoin.price, coin.price),
-            totalMoney: walletCoin.amount * coin.price,
-            totalProfit: walletCoin.amount * coin.price - walletCoin.amount * walletCoin.price,
             ...walletCoin
           }
         }))
