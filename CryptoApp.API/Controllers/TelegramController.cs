@@ -77,7 +77,7 @@ namespace CryptoApp.API.Controllers
             return Ok(summary);
         }
 
-        [HttpDelete("user /{transactionId}/transaction")]
+        [HttpDelete("user/{transactionId}/transaction")]
         public async Task<ActionResult> DeleteTransactionById(string transactionId)
         {
             await _tgUserService.DeleteTransactionById(transactionId);
