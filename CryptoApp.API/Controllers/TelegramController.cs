@@ -63,7 +63,7 @@ namespace CryptoApp.API.Controllers
             }
 
             // Логирование всех полей:
-            Console.WriteLine($"Received transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}");
+            Console.WriteLine($"Received transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
 
             await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
 

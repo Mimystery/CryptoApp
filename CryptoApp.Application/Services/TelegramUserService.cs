@@ -80,6 +80,7 @@ namespace CryptoApp.Application.Services
 
         public async Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction)
         {
+            Console.WriteLine($"Added transaction in Service: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
             await _tgUserRepository.AddTransaction(telegramUserId, coinTransaction);
         }
 

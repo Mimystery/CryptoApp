@@ -15,7 +15,7 @@ namespace CryptoApp.DataAccess.Configurations
         {
             builder.HasKey(u => u.Id);
 
-            builder.HasMany(u => u.Transactions).WithOne(c => c.User);
+            builder.HasMany(u => u.Transactions).WithOne(c => c.User).HasForeignKey(c => c.TelegramUserId).IsRequired();
         }
     }
 }

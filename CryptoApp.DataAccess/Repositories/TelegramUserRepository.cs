@@ -49,6 +49,7 @@ namespace CryptoApp.DataAccess.Repositories
 
         public async Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction)
         {
+            Console.WriteLine($"Added transaction in repository: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
             var user = await _context.TelegramUsers.Include(u => u.Transactions).FirstOrDefaultAsync(u => u.Id == telegramUserId);
 
             var transaction = new CoinTransactionEntity
