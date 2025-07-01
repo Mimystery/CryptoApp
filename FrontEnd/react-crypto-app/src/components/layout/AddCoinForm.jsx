@@ -22,10 +22,6 @@ const {selectCoins, addCoin, user, prices} = useContext(CryptoContext)
 const [submitted, setSubmit] = useState(false)
 const coinRef = useRef()
 
-const handleSelect = (value) =>{
-  console.log(value)
-}
-
 if(submitted){
   return (<Result
     status="success"
@@ -59,9 +55,8 @@ if(!coin){
   />
     )
 }
-console.log(prices)
+
 const onFinish = (values) =>{
-  console.log(values)
   const newCoin = {
     coinId: coin.id,
     symbol: coin.symbol,
@@ -71,7 +66,6 @@ const onFinish = (values) =>{
     price: values.price,
     transactionDate: values.date?.$d ?? new Date(),
   }
-  console.log(newCoin)
   coinRef.current = newCoin
   addCoin(newCoin)
   setSubmit(true)
@@ -84,12 +78,7 @@ const updateTotal = () => {
     total: +(amount * price).toFixed(2),
   })
 }
-console.log(coin.symbol)
-console.log(+(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
-      coin.symbol.toLowerCase()).price))
-const selectedCoinToAdd = parseFloat(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
-      coin.symbol.toLowerCase()).price)
-console.log(selectedCoinToAdd)
+
   return(
     <Form
     form={form}
