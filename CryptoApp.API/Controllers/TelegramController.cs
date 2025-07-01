@@ -62,12 +62,17 @@ namespace CryptoApp.API.Controllers
                 return BadRequest("coinTransaction is null");
             }
 
-            // Логирование всех полей:
-            Console.WriteLine($"Received transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
-
-            await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
-
-            return Ok("Transaction added successfully");
+            try
+            {
+                Console.WriteLine($"Received transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
+                await _tgUserService.AddTransaction(telegramUserId, coinTransaction);
+                return Ok("Transaction added successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error in AddTransaction: {ex}");
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet("user/{telegramUserId}/transaction")]
