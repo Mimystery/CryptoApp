@@ -18,7 +18,7 @@ const validateMessages = {
 export default function AddCoinForm({onClose}){
 const [form] = Form.useForm()
 const [coin, setCoin] = useState(null)
-const {selectCoins, addCoin} = useContext(CryptoContext)
+const {selectCoins, addCoin, user} = useContext(CryptoContext)
 const [submitted, setSubmit] = useState(false)
 const coinRef = useRef()
 
@@ -63,8 +63,11 @@ if(!coin){
 const onFinish = (values) =>{
   console.log(values)
   const newCoin = {
+    telegramUserId: user?.id,
     id: coin.id,
     symbol: coin.symbol,
+    name: coin.name,
+    imageUrl: coin.imageUrl,
     amount: values.amount,
     price: values.price,
     date: values.date?.$d ?? new Date(),
@@ -72,7 +75,7 @@ const onFinish = (values) =>{
   console.log(newCoin)
   coinRef.current = newCoin
   setSubmit(true)
-  addCoin(newCoin)
+  //addCoin(newCoin)
 }
 
 const updateTotal = () => {
