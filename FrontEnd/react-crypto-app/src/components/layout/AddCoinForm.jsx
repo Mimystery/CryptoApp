@@ -94,7 +94,7 @@ console.log(prices)
       style={{ maxWidth: 600 }}
       initialValues={{
         price: +(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
-      coin.symbol.toLowerCase().price).toFixed(2))
+      coin.symbol.toLowerCase())?.price).toFixed(2)
       }}
       onFinish={onFinish}
       validateMessages={validateMessages}>
