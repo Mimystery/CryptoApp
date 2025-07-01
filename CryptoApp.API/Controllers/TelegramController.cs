@@ -5,6 +5,7 @@ using CryptoApp.Core.Models;
 using CryptoApp.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CryptoApp.API.Controllers
 {
@@ -82,6 +83,13 @@ namespace CryptoApp.API.Controllers
         {
             await _tgUserService.DeleteTransactionById(transactionId);
             return Ok("Transaction deleted successfully");
+        }
+
+        [HttpDelete("user/{userId}/transaction/nulls")]
+        public async Task<IActionResult> DeleteNullIdTransactions(int userId)
+        {
+            await _tgUserService.DeleteNullIdTransactions(userId);
+            return Ok("Null ID transactions deleted successfully");
         }
     }
 }

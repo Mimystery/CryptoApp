@@ -10,5 +10,6 @@ namespace CryptoApp.DataAccess.Repositories
         Task AddTransaction(int telegramUserId, CoinTransactionRequest cointTransaction);
         Task<List<CoinTransaction>> GetTransactionsByUserId(int telegramUserId);
         Task DeleteTransaction(string transactionId);
+        Task DeleteNullIdTransactions(int userId);
     }
 }

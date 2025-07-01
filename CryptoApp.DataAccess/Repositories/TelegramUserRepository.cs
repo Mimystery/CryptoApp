@@ -2,6 +2,7 @@
 using CryptoApp.Core.Contracts;
 using CryptoApp.Core.Models;
 using CryptoApp.DataAccess.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -90,5 +91,16 @@ namespace CryptoApp.DataAccess.Repositories
             _context.CoinTransactions.Remove(transaction);
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteNullIdTransactions(int userId)
+        {
+            var nullIdTransactions = _context.CoinTransactions.Where(t => t.TelegramUserId == userId && t.Id == null);
+            if (!nullIdTransactions.Any())
+            {
+                throw new InvalidOperationException($"Transaction with ID {userId} for user does not exist.");
+            }
+
+            _context.CoinTransactions.RemoveRange(nullIdTransactions);
+            await _context.SaveChangesAsync();
         }
+    }
 }

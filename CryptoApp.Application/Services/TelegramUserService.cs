@@ -112,5 +112,10 @@ namespace CryptoApp.Application.Services
         {
             await _tgUserRepository.DeleteTransaction(transactionid);
         }
+
+        public async Task DeleteNullIdTransactions(int userId)
+        {
+            await _tgUserRepository.DeleteNullIdTransactions(userId);
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace CryptoApp.Application.Services
         Task<List<CoinTransaction>> GetTransactionsByTelegramUserId(int telegramUserId);
         Task<List<CoinSummaryResponse>> GetSummaryOnEveryCoin(int telegramUserId);
         Task DeleteTransactionById(string transactionid);
+        Task DeleteNullIdTransactions(int userId);
     }
 }
