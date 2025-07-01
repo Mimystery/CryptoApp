@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
-import { fetchCryptoWallet, fetchPrice, fetchSelectCoins } from '../api';
+import { addTransaction, fetchCryptoWallet, fetchPrice, fetchSelectCoins } from '../api';
 import { isTokenExpired, percentDifference } from '../utils'
 
 export const CryptoContext = createContext({
@@ -81,8 +81,14 @@ useEffect(() =>{
     fetchCryptoSelect()
   }, [isAuthenticated, isInitialized]);
 
-  const addCoin = (newCoin) =>{
+  const addCoin = async (newCoin) => {
+    try{
+      await addTransaction(newCoin);
     setWallet((prev) => [...prev, newCoin])
+    }
+    catch(error){
+      console.error(error)
+    }
   }
 
 

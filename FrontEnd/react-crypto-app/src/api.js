@@ -62,10 +62,12 @@ export const fetchSelectCoins = async (token) => {
     } 
 }
 
-export const fetchFullCoins = async () => {
+export const addTransaction = async (coin) => {
+  const user = JSON.parse(localStorage.getItem('userData'))
   try 
     {
-      const matchedCoins = await fetchSelectCoins();
+      var response = await axios.post(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/transaction`, coin)
+      return response.status
     }
     catch (error) 
     {

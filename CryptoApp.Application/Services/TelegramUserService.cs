@@ -107,5 +107,10 @@ namespace CryptoApp.Application.Services
             return summary;
 
         }
+
+        public async Task DeleteTransactionById(string transactionid)
+        {
+            await _tgUserRepository.DeleteTransaction(transactionid);
+        }
     }
 }

@@ -79,5 +79,16 @@ namespace CryptoApp.DataAccess.Repositories
             
             return _mapper.Map<List<CoinTransaction>>(transactions);
         }
-    }
+        public async Task DeleteTransaction(string transactionId)
+        {
+            var transaction = await _context.CoinTransactions
+                .FirstOrDefaultAsync(t => t.Id == transactionId);
+            if (transaction == null)
+            {
+                throw new InvalidOperationException($"Transaction with ID {transactionId} for user does not exist.");
+            }
+            _context.CoinTransactions.Remove(transaction);
+            await _context.SaveChangesAsync();
+        }
+        }
 }
