@@ -22,13 +22,14 @@ const [user, setUser] = useState(null);
 const [isInitialized, setIsInitialized] = useState(false);
 
 const mapWallet = (wallet, prices) =>{
-  return wallet.map(walletCoin =>{
-    const coin = prices.find((c) => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol)
+  if (!Array.isArray(wallet) || !Array.isArray(prices)) return [];
+  return wallet.map(walletCoin => {
+    const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol);
     return {
-      grow: walletCoin.price < coin.price,
-      growPercent: percentDifference(walletCoin.price, coin.price),
+      grow: coin ? walletCoin.price < coin.price : false,
+      growPercent: coin ? percentDifference(walletCoin.price, coin.price) : 0,
       ...walletCoin
-    }
+    };
   })
 }
 
