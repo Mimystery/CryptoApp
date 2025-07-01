@@ -49,8 +49,16 @@ namespace CryptoApp.DataAccess.Repositories
 
         public async Task AddTransaction(int telegramUserId, CoinTransactionRequest coinTransaction)
         {
-            Console.WriteLine($"Added transaction in repository: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
-            var user = await _context.TelegramUsers.Include(u => u.Transactions).FirstOrDefaultAsync(u => u.Id == telegramUserId);
+            Console.WriteLine($"Attempting to add transaction: CoinId={coinTransaction.CoinId}, Symbol={coinTransaction.Symbol}, Amount={coinTransaction.Amount}, Date={coinTransaction.TransactionDate}, TgUserId={telegramUserId}");
+
+            var user = await _context.TelegramUsers
+                .Include(u => u.Transactions)
+                .FirstOrDefaultAsync(u => u.Id == telegramUserId);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException($"Telegram user with ID {telegramUserId} does not exist.");
+            }
 
             var transaction = new CoinTransactionEntity
             {
@@ -65,13 +73,40 @@ namespace CryptoApp.DataAccess.Repositories
                 TransactionDate = coinTransaction.TransactionDate
             };
 
-            if (user == null)
+            try
             {
-                throw new InvalidOperationException($"Telegram user with ID {telegramUserId} does not exist.");
-            }
+                // Добавляем транзакцию через навигационное свойство пользователя
+                user.Transactions.Add(transaction);
 
-            _context.CoinTransactions.Add(transaction);
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                Console.WriteLine("Transaction saved successfully.");
+            }
+            catch (DbUpdateException dbEx)
+            {
+                Console.Error.WriteLine("DbUpdateException occurred while saving transaction:");
+                Console.Error.WriteLine(dbEx);
+
+                if (dbEx.InnerException != null)
+                {
+                    Console.Error.WriteLine("Inner exception:");
+                    Console.Error.WriteLine(dbEx.InnerException.Message);
+                }
+
+                throw; // Проброс исключения дальше (если нужно, можно изменить на возврат ошибки)
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine("Unexpected exception occurred while saving transaction:");
+                Console.Error.WriteLine(ex);
+
+                if (ex.InnerException != null)
+                {
+                    Console.Error.WriteLine("Inner exception:");
+                    Console.Error.WriteLine(ex.InnerException.Message);
+                }
+
+                throw;
+            }
         }
 
         public async Task<List<CoinTransaction>> GetTransactionsByUserId(int telegramUserId)
