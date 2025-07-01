@@ -56,7 +56,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
                 {/* {(coin.value).toFixed(2)} */}
                 
                 {item.isDollar && (<Typography.Text type={coin.grow ? 'success' : 'danger'}>{(item.value?.toFixed(2)) ?? '0.00'}$</Typography.Text>)}
-                {!item.isDollar && <span>{item.value?.toFixed(4)}</span>}
+                {!item.isDollar && <span>{(item.value?.toFixed(4)) ?? '0.00'}</span>}
               </List.Item>
             )}/>
         </Card>
