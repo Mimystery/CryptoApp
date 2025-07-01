@@ -86,6 +86,7 @@ useEffect(() =>{
   }, [isAuthenticated, isInitialized]);
 
   const addCoin = async (newCoin) => {
+    let prices = await fetchPrice();
     try
     {
     await addTransaction(newCoin);

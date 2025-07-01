@@ -25,12 +25,8 @@ const {prices, wallet, selectCoins, isAuthenticated, user} = useContext(CryptoCo
 const handleSelect = (value) =>{
   console.log(value)
 }
-
-console.log(isAuthenticated);
 const userDataRaw = localStorage.getItem('userData')
 const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
-console.log("Header user:" + userData?.id);
-console.log("User from context:" + user?.id);
 
     return(
     <Layout.Header style={headerStyle}>
