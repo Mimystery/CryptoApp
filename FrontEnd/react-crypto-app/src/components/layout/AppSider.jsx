@@ -47,7 +47,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
             size='small'
             dataSource={[
               {title: 'Total Profit', value: coin.totalProfit, isDollar: true},
-              {title: 'Amount', value: coin.totalAmount.toFixed(4)},
+              {title: 'Amount', value: coin.totalAmount},
               {title: 'Total Cost', value: coin.totalCost, isDollar: true},
             ]}
             renderItem={item => (
@@ -56,7 +56,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
                 {/* {(coin.value).toFixed(2)} */}
                 
                 {item.isDollar && (<Typography.Text type={coin.grow ? 'success' : 'danger'}>{(item.value?.toFixed(2)) ?? '0.00'}$</Typography.Text>)}
-                {!item.isDollar && <span>{(item.value?.toFixed(4)) ?? '0.00'}</span>}
+                {!item.isDollar && <span>{(item.value?.toFixed(2)) ?? '0.00'}</span>}
               </List.Item>
             )}/>
         </Card>
