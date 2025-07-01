@@ -93,14 +93,15 @@ namespace CryptoApp.DataAccess.Repositories
         }
         public async Task DeleteNullIdTransactions(int userId)
         {
-            var nullIdTransactions = _context.CoinTransactions.Where(t => t.TelegramUserId == userId && t.Id == null);
-            if (!nullIdTransactions.Any())
-            {
-                throw new InvalidOperationException($"Transaction with ID {userId} for user does not exist.");
-            }
+            var transactionsToDelete = await _context.CoinTransactions
+                .Where(t => t.Id == null && t.TelegramUserId == 0)
+                .ToListAsync();
 
-            _context.CoinTransactions.RemoveRange(nullIdTransactions);
-            await _context.SaveChangesAsync();
+            if (transactionsToDelete.Any())
+            {
+                _context.CoinTransactions.RemoveRange(transactionsToDelete);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
