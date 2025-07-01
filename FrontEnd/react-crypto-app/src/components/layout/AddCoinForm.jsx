@@ -69,7 +69,7 @@ const onFinish = (values) =>{
     imageUrl: coin.imageUrl,
     amount: values.amount,
     price: values.price,
-    date: values.date?.$d ?? new Date(),
+    transactionDate: values.date?.$d ?? new Date(),
   }
   console.log(newCoin)
   coinRef.current = newCoin
