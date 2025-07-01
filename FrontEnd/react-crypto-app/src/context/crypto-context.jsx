@@ -89,7 +89,7 @@ useEffect(() =>{
     try
     {
     await addTransaction(newCoin);
-    setWallet((prev) => mapWallet([...prev, newCoin]), prices)
+    setWallet((prev) => mapWallet([...prev, newCoin], prices))
     }
     catch(error){
       console.error(error)
