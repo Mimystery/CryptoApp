@@ -84,7 +84,7 @@ const updateTotal = () => {
     total: +(amount * price).toFixed(2),
   })
 }
-console.log(prices)
+console.log(coin.symbol)
   return(
     <Form
     form={form}
@@ -94,7 +94,7 @@ console.log(prices)
       style={{ maxWidth: 600 }}
       initialValues={{
         price: +(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
-      coin.symbol.toLowerCase())?.price).toFixed(2)
+      coin.symbol.toLowerCase())?.price || 0).toFixed(2)
       }}
       onFinish={onFinish}
       validateMessages={validateMessages}>
