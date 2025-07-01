@@ -61,6 +61,7 @@ useEffect(() =>{
         let prices = await fetchPrice();
         let wallet = await fetchCryptoWallet();
 
+        console.log(wallet)
         setWallet(mapWallet(wallet, prices))
         setPrices(prices)
         setLoading(false)
