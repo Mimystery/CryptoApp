@@ -25,11 +25,12 @@ const mapWallet = (wallet, prices) =>{
   if (!Array.isArray(wallet) || !Array.isArray(prices)) return [];
   console.log(prices);
   return wallet.map(walletCoin => {
-    const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol);
+    const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol.toLowerCase());
+    const currentPrice = parseFloat(coin.price);
     return {
-      grow: walletCoin.price < coin.price,
-      growPercent: percentDifference(walletCoin.price, coin.price),
-      totalProfit: (coin.price - walletCoin.averagePrice) * walletCoin.totalAmount,
+      grow: walletCoin.price < currentPrice,
+      growPercent: percentDifference(walletCoin.price, currentPrice),
+      totalProfit: (currentPrice - walletCoin.averagePrice) * walletCoin.totalAmount,
       ...walletCoin
     };
   })
