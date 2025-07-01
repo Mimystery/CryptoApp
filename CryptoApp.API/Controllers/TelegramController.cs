@@ -77,10 +77,10 @@ namespace CryptoApp.API.Controllers
             return Ok(summary);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteTransactionById(string transactionid)
+        [HttpDelete("user /{transactionId}/transaction")]
+        public async Task<ActionResult> DeleteTransactionById(string transactionId)
         {
-            await _tgUserService.DeleteTransactionById(transactionid);
+            await _tgUserService.DeleteTransactionById(transactionId);
             return Ok("Transaction deleted successfully");
         }
     }
