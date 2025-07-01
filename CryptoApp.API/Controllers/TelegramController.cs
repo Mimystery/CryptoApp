@@ -76,10 +76,6 @@ namespace CryptoApp.API.Controllers
         public async Task<ActionResult<List<CoinSummaryResponse>>> GetSummaryOnEveryCoin(int telegramUserId)
         {
             var summary = await _tgUserService.GetSummaryOnEveryCoin(telegramUserId);
-            if (summary == null || !summary.Any())
-            {
-                return NotFound("No coin summary found for this user");
-            }
 
             return Ok(summary);
         }
