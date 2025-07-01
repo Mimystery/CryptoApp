@@ -1,4 +1,6 @@
 import { Layout, Typography } from 'antd';
+import { useContext } from 'react';
+import { CryptoContext } from '../../context/crypto-context';
 
 const contentStyle = {
   textAlign: 'center',
@@ -9,9 +11,14 @@ const contentStyle = {
 };
 
 export default function WalletWidget(){
+const {wallet, prices} = useContext(CryptoContext)
+
+console.log(wallet)
     return (
         <Layout.Content>
-          <Typography.Title level={3} style={{textAlign: 'left'}}>Portfolio:</Typography.Title>
+          <Typography.Title level={3} style={{textAlign: 'left'}}>
+            Portfolio: {}
+          </Typography.Title>
         </Layout.Content>
     )
 }
