@@ -23,7 +23,6 @@ export const fetchPrice = async () => {
 
 export const fetchCryptoWallet = async () =>{
 const user = JSON.parse(localStorage.getItem('userData'))
-console.log("User id from api;" + user?.id)
   try
   {
     const wallet = await axios.get(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/summary`)
@@ -66,7 +65,6 @@ export const addTransaction = async (coin) => {
   const user = JSON.parse(localStorage.getItem('userData'))
   try 
     {
-      console.log("Отправляем на сервер:", coin, "id user:", user.id);
       var response = await axios.post(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/transaction`, coin)
       return response.status
     }
