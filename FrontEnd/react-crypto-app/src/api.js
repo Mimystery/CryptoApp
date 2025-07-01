@@ -22,7 +22,8 @@ export const fetchPrice = async () => {
 }
 
 export const fetchCryptoWallet = async () =>{
-const {user} = useContext(CryptoContext)
+const user = localStorage.getItem('userData')
+console.log("User id from api;" + user?.id)
   try
   {
     const wallet = await axios.get(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/summary`)
