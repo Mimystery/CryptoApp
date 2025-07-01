@@ -85,8 +85,11 @@ const updateTotal = () => {
   })
 }
 console.log(coin.symbol)
-console.log(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
-      coin.symbol.toLowerCase()))
+console.log(+(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
+      coin.symbol.toLowerCase()).price))
+const selectedCoinToAdd = parseFloat(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
+      coin.symbol.toLowerCase()).price)
+console.log(selectedCoinToAdd)
   return(
     <Form
     form={form}
