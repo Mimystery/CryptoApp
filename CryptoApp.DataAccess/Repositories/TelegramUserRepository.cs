@@ -70,6 +70,7 @@ namespace CryptoApp.DataAccess.Repositories
             }
 
             user.Transactions.Add(transaction);
+            _context.CoinTransactions.Add(transaction);
             await _context.SaveChangesAsync();
         }
 
