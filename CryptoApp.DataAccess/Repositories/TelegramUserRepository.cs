@@ -94,7 +94,7 @@ namespace CryptoApp.DataAccess.Repositories
         public async Task DeleteNullIdTransactions(int userId)
         {
             var transactionsToDelete = await _context.CoinTransactions
-                .Where(t => t.Id == null && t.TelegramUserId == userId)
+                .Where(t => string.IsNullOrEmpty(t.Id) && t.TelegramUserId == userId)
                 .ToListAsync();
 
             if (transactionsToDelete.Any())
