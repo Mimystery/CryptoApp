@@ -84,7 +84,7 @@ const updateTotal = () => {
     total: +(amount * price).toFixed(2),
   })
 }
-
+console.log(coin.price)
   return(
     <Form
     form={form}
@@ -93,7 +93,7 @@ const updateTotal = () => {
       wrapperCol={{ span: 10 }}
       style={{ maxWidth: 600 }}
       initialValues={{
-        price: +coin.price.toFixed(2),
+        price: coin.price,
       }}
       onFinish={onFinish}
       validateMessages={validateMessages}>
