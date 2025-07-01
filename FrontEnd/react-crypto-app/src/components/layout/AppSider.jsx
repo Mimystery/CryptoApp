@@ -36,7 +36,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
       wallet.map(coin => (
         <Card key={coin.symbol} style={{ width: '100%', marginBottom: '1rem' }}>
           <Statistic 
-            title={coin.symbol}
+            title={coin.name}
             value={coin.growPercent}
             precision={2}
             prefix={coin.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
