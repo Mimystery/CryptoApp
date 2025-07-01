@@ -63,7 +63,7 @@ if(!coin){
 const onFinish = (values) =>{
   console.log(values)
   const newCoin = {
-    id: coin.id,
+    coinId: coin.id,
     symbol: coin.symbol,
     name: coin.name,
     imageUrl: coin.imageUrl,
