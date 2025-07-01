@@ -23,6 +23,7 @@ const [isInitialized, setIsInitialized] = useState(false);
 
 const mapWallet = (wallet, prices) =>{
   if (!Array.isArray(wallet) || !Array.isArray(prices)) return [];
+  console.log(prices);
   return wallet.map(walletCoin => {
     const coin = prices.find(c => c.symbol.replace(/USDT$/, "").toLowerCase() === walletCoin.symbol);
     return {
@@ -62,7 +63,6 @@ useEffect(() =>{
         let prices = await fetchPrice();
         let wallet = await fetchCryptoWallet();
 
-        console.log(wallet)
         setWallet(mapWallet(wallet, prices))
         setPrices(prices)
         setLoading(false)
