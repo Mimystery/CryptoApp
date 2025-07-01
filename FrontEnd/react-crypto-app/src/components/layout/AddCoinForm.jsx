@@ -63,7 +63,6 @@ if(!coin){
 const onFinish = (values) =>{
   console.log(values)
   const newCoin = {
-    telegramUserId: user?.id,
     id: coin.id,
     symbol: coin.symbol,
     name: coin.name,

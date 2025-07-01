@@ -8,7 +8,6 @@ namespace CryptoApp.Core.Contracts
 {
     public class CoinTransactionRequest
     {
-        public int TelegramUserId { get; set; }
         public string CoinId { get; set; }
         public string Symbol { get; set; }
         public string Name { get; set; }
