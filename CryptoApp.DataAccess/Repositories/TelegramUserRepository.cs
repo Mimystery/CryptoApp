@@ -76,8 +76,9 @@ namespace CryptoApp.DataAccess.Repositories
             try
             {
                 // Добавляем транзакцию через навигационное свойство пользователя
-                user.Transactions.Add(transaction);
-
+                //user.Transactions.Add(transaction);
+                //_context.TelegramUsers.Update(user);                        
+                _context.CoinTransactions.Add(transaction);
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Transaction saved successfully.");
             }
