@@ -31,6 +31,8 @@ const mapWallet = (wallet, prices) =>{
     const price = parseFloat(walletCoin.averagePrice);
     const avgPrice = parseFloat(walletCoin.averagePrice);
     const totalAmount = parseFloat(walletCoin.totalAmount);
+    console.log("Current price", currentPrice)
+    console.log("Price", price)
     console.log(price < currentPrice)
     console.log(percentDifference(price, currentPrice))
     return {
