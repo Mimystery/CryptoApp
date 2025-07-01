@@ -18,7 +18,7 @@ const validateMessages = {
 export default function AddCoinForm({onClose}){
 const [form] = Form.useForm()
 const [coin, setCoin] = useState(null)
-const {selectCoins, addCoin, user} = useContext(CryptoContext)
+const {selectCoins, addCoin, user, prices} = useContext(CryptoContext)
 const [submitted, setSubmit] = useState(false)
 const coinRef = useRef()
 
@@ -59,7 +59,7 @@ if(!coin){
   />
     )
 }
-console.log(coin)
+console.log(prices)
 const onFinish = (values) =>{
   console.log(values)
   const newCoin = {
@@ -84,7 +84,7 @@ const updateTotal = () => {
     total: +(amount * price).toFixed(2),
   })
 }
-console.log(coin)
+console.log(prices)
   return(
     <Form
     form={form}

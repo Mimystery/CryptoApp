@@ -5,7 +5,7 @@ import { isTokenExpired, percentDifference } from '../utils'
 
 export const CryptoContext = createContext({
     wallet: [],
-    crypto: [],
+    prices: [],
     selectCoins: [],
     isAuthenticated: false,
     user: null,
