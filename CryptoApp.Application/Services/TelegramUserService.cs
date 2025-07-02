@@ -97,10 +97,11 @@ namespace CryptoApp.Application.Services
                 .Select(s =>
                 {
                     var purchases = s.Where(t => t.Amount > 0).ToList();
+                    var sales = s.Where(t => t.Amount < 0).ToList();
 
                     var totalAmount = s.Sum(t => t.Amount);
                     var totalCost = s.Sum(t => t.Amount * t.Price);
-                    var averagePrice = purchases.Any() ? s.Average(t => t.Price) : 0;
+                    var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
 
                     return new CoinSummaryResponse
                     {
