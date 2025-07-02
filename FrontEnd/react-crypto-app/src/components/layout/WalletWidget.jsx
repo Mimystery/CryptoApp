@@ -1,6 +1,7 @@
 import { Layout, Typography } from 'antd';
 import { useContext } from 'react';
 import { CryptoContext } from '../../context/crypto-context';
+import PortfolioChart from './PortfolioChart';
 
 const contentStyle = {
   textAlign: 'center',
@@ -26,6 +27,7 @@ const portfolio = wallet.map(coin => coin.totalAmount * cryptoPriceMap[coin.symb
           <Typography.Title level={3} style={{textAlign: 'left'}}>
             Portfolio: {portfolio}$
           </Typography.Title>
+          <PortfolioChart/>
         </Layout.Content>
     )
 }
