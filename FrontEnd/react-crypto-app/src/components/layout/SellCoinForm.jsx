@@ -1,6 +1,6 @@
 import { useState, useContext, useRef } from "react"
 import { Divider, Flex, Select, Space, Typography, Form, Input, 
-  InputNumber, Button, DatePicker, Result } from "antd"
+  InputNumber, Button, DatePicker, Result, InputGroup } from "antd"
 import { CryptoContext } from '../../context/crypto-context';
 import CoinLabel from "./CoinLabel";
 
