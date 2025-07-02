@@ -63,7 +63,7 @@ const onClick = (coin) => {
                 {!item.isDollar && <span>{(item.value?.toFixed(4)) ?? '0.00'}</span>}
               </List.Item>
             )}/>
-            <Button onClick={onClick}>Sell coin</Button>
+            <Button type="primary" color='danger' onClick={() => onClick(coin)}>Sell coin</Button>
         </Card>
         ))
       )}
