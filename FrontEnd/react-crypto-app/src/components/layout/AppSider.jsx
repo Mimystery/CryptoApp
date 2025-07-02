@@ -1,4 +1,4 @@
-import { Flex, Layout } from 'antd';
+import { Button, Flex, Layout } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useContext, useEffect, useState } from "react";
 import { Card, Statistic, List, Typography} from 'antd';
@@ -59,6 +59,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
                 {!item.isDollar && <span>{(item.value?.toFixed(4)) ?? '0.00'}</span>}
               </List.Item>
             )}/>
+            <Button>Sell coin</Button>
         </Card>
         ))
       )}
