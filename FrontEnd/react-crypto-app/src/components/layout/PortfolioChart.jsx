@@ -29,7 +29,7 @@ const data = {
 };
 
     return(
-        <div style={{display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: '40$'}}>
+        <div style={{display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: '30%'}}>
             <Pie data={data}></Pie>
         </div>
     )
