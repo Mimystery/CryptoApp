@@ -14,7 +14,6 @@ namespace CryptoApp.Core.Contracts
         public string ImageUrl { get; set; }
         public double TotalAmount { get; set; }
         public double AveragePrice { get; set; }
-        public double TotalCost { get; set; }
         public double Invested { get; set; }
         public double Earned { get; set; }
         public double InvestedOnSold { get; set; }

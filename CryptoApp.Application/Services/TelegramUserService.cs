@@ -130,7 +130,6 @@ namespace CryptoApp.Application.Services
                         ImageUrl = s.First().ImageUrl,
                         TotalAmount = totalAmount,
                         AveragePrice = averagePrice,
-                        TotalCost = totalCost,
                         Invested = invested,
                         Earned = earned,
                         InvestedOnSold = investedOnSold,
