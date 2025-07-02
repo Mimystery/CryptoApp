@@ -97,11 +97,14 @@ const onChange = (pagination, filters, sorter, extra) => {
 };
 
 export default function TransactionsTable(){
-const {wallet, prices} = useContext(CryptoContext)
+const {wallet, prices, transactions} = useContext(CryptoContext)
 
-const data = wallet.map((c) => ({
-    key: c.id,
+const data = transactions.map((c) => ({
+    key: c.coinId,
     name: c.name,
+    price: c.price,
+    amount: c.amount,
+    transactionDate: c.transactionDate,
 }))
 
 const onChange = (pagination, filters, sorter, extra) => {
