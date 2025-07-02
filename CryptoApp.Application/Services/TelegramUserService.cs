@@ -100,7 +100,7 @@ namespace CryptoApp.Application.Services
                     var sales = s.Where(t => t.Amount < 0).ToList();
 
                     var totalAmount = s.Sum(t => t.Amount);
-                    var totalCost = s.Sum(t => t.Amount * t.Price);
+                    var totalCost = s.Sum(t => totalAmount * t.Price);
                     var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
 
                     var invested = purchases.Sum(t => t.Amount * t.Price);

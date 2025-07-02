@@ -30,7 +30,7 @@ const data = {
 };
 
     return(
-        <div style={{display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: '45%'}}>
+        <div style={{display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: '40%'}}>
             <Pie options={{ maintainAspectRatio: false }} data={data}></Pie>
         </div>
     )
