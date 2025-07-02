@@ -24,9 +24,9 @@ const coinRef = useRef()
 if(submitted){
   return (<Result
     status="success"
-    title="Successfully added new coin to your wallet!"
-    subTitle={`Added ${coinRef.current.amount} of ${coin.name} 
-    by price ${coinRef.current.price} to your wallet`}
+    title="Successfully sold coin from your wallet!"
+    subTitle={`Sold ${coinRef.current.amount} of ${coin.name} 
+    by price ${coinRef.current.price} from your wallet`}
     extra={[
       <Button type="primary" key="console" onClick={onClose}>
         Close
@@ -42,7 +42,7 @@ const onFinish = (values) =>{
     symbol: coin.symbol,
     name: coin.name,
     imageUrl: coin.imageUrl,
-    amount: values.amount,
+    amount: -(values.amount),
     price: values.price,
     transactionDate: values.date?.$d ?? new Date(),
   }
@@ -76,16 +76,45 @@ const updateTotal = () => {
         <Divider/>
     <Form.Item
       label="Amount"
-      name="amount"
-      rules={[{ 
-        required: true, 
-        type: 'number',
-        min: 0,
-      }]}
+      required
       style={{ width: '100%', marginRight: '1rem' }}
     >
-      <InputNumber onChange={updateTotal} placeholder="Enter coin amount" style={{ width: '100%' }} 
-      parser={(value) => value.replace(',', '.').replace(/[^\d.]/g, '')}/>
+ <InputGroup compact>
+      <Form.Item 
+        name="amount"
+        noStyle
+        rules={[
+            {
+                required: true,
+                type: 'number',
+                min: 0,
+                validator: (_, value) => {
+                    if( value > coin.totalAmount){
+                        return Promise.reject(`Max amount is ${coin.totalAmount}`)
+                    }
+                    return Promise.resolve()
+                },
+            },
+        ]}>
+            <InputNumber 
+            onChange={(val) => {
+                const value = parseFloat(val) || 0;
+                if(value > coin.totalAmount){
+                    form.setFieldsValue({amount: coin.totalAmount})
+                }
+                updateTotal()
+            }}
+            placeholder="Enter coin amount" 
+            style={{ width: '100%' }} 
+            parser={(value) => value.replace(',', '.').replace(/[^\d.]/g, '')}/>
+        </Form.Item>
+        <Button onClick={() => {
+                form.setFieldsValue({ amount: coin.totalAmount})
+                updateTotal()
+            }}
+            type="default">
+        </Button>
+    </InputGroup>
     </Form.Item>
 
     <Form.Item
