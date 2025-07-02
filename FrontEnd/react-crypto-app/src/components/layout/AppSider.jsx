@@ -1,7 +1,7 @@
 import { Button, Flex, Layout } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useContext, useEffect, useState } from "react";
-import { Card, Statistic, List, Typography} from 'antd';
+import { Card, Statistic, List, Typography, Drawer} from 'antd';
 import { percentDifference } from '../../utils'
 import { CryptoContext } from '../../context/crypto-context';
 
