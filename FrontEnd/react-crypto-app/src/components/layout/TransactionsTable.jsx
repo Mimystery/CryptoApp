@@ -1,4 +1,6 @@
 import { Table } from 'antd';
+import { useContext } from 'react';
+import { CryptoContext } from '../../context/crypto-context';
 
 const columns = [
   {
@@ -29,21 +31,26 @@ const columns = [
         ],
       },
     ],
-    // specify the condition of filtering result
-    // here is that finding the name started with `value`
+ 
     onFilter: (value, record) => record.name.indexOf(value) === 0,
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ['descend'],
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
+    title: 'Price',
+    dataIndex: 'price',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.age - b.age,
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
+    title: 'Amount',
+    dataIndex: 'amount',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.age - b.age,
+  },
+  {
+    title: 'Transaction date',
+    dataIndex: 'transactionDate',
     filters: [
       {
         text: 'London',
@@ -56,6 +63,7 @@ const columns = [
     ],
     onFilter: (value, record) => record.address.indexOf(value) === 0,
   },
+  
 ];
 const data = [
   {
@@ -89,8 +97,19 @@ const onChange = (pagination, filters, sorter, extra) => {
 };
 
 export default function TransactionsTable(){
+const {wallet, prices} = useContext(CryptoContext)
+
+const data = wallet.map((c) => ({
+    key: c.id,
+    name: c.name,
+}))
+
+const onChange = (pagination, filters, sorter, extra) => {
+  console.log('params', pagination, filters, sorter, extra);
+};
     return(
         <Table 
+        pagination={false}
         columns={columns} 
         dataSource={data} 
         onChange={onChange} 

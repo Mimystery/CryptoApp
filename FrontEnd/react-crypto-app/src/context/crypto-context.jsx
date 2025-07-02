@@ -1,11 +1,12 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
-import { addTransaction, fetchCryptoWallet, fetchPrice, fetchSelectCoins } from '../api';
+import { addTransaction, fetchAllTransactions, fetchCryptoWallet, fetchPrice, fetchSelectCoins } from '../api';
 import { isTokenExpired, percentDifference } from '../utils'
 
 export const CryptoContext = createContext({
     wallet: [],
     prices: [],
+    transactions: [],
     selectCoins: [],
     isAuthenticated: false,
     user: null,
@@ -15,6 +16,7 @@ export const CryptoContext = createContext({
 export const CryptoContextProvider = ({children}) => {
 const [prices, setPrices] = useState([]);
 const [wallet, setWallet] = useState([]);
+const [transactions, setTransactions] = useState([]);
 const [loading, setLoading] = useState(true);
 const [selectCoins, setSelectCoins] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,7 +86,10 @@ useEffect(() =>{
     const fetchCryptoSelect = async () => {
         setLoading(true)
         let selectCoins = await fetchSelectCoins(token);
+        let transactions = await fetchAllTransactions();
+        
         setSelectCoins(selectCoins)
+        setTransactions(transactions)
         setLoading(false)
 
     }
@@ -96,7 +101,11 @@ useEffect(() =>{
     try
     {
     await addTransaction(newCoin);
-    setWallet((prev) => mapWallet([...prev, newCoin], prices))
+    let wallet = await fetchCryptoWallet();
+    let transactions = await fetchAllTransactions();
+
+    setWallet(mapWallet(wallet, prices))
+    setTransactions(transactions)
     }
     catch(error){
       console.error(error)
@@ -106,7 +115,7 @@ useEffect(() =>{
 
     return(
     <CryptoContext.Provider value={{prices, wallet, loading, selectCoins, isAuthenticated, 
-    setIsAuthenticated, user, setUser, setLoading, addCoin}}>
+    setIsAuthenticated, user, setUser, setLoading, addCoin, transactions, setTransactions}}>
         {children}
     </CryptoContext.Provider>
     )

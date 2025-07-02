@@ -70,6 +70,19 @@ export const addTransaction = async (coin) => {
     }
     catch (error) 
     {
-      console.error("Ошибка при получении списка криптовалют:", error);
+      console.error(error);
     } 
+}
+
+export const fetchAllTransactions = async () => {
+  const user = JSON.parse(localStorage.getItem('userData'))
+  try 
+  {
+    var response = await axios.get(`https://cryptoapp-foee.onrender.com/api/Telegram/user/${user?.id}/transaction`)
+    return response.data;
+  }
+  catch (error) 
+  {
+    console.error(error);
+  } 
 }
