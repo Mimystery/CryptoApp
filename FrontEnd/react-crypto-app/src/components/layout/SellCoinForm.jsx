@@ -35,25 +35,25 @@ if(submitted){
   />)
 }
 
-if(!coin){
-    return(
-        <Select
-    style={{ width: '100%' }}
-    onSelect={(v) => setCoin(selectCoins.find((c) => c.symbol === v))}
-    value="Select coin"
-    options={selectCoins.map((coin)=>({
-      label: coin.name,
-      value: coin.symbol,
-      icon: coin.imageUrl
-    }))}
-    optionRender={option => (
-      <Space>
-        <img src={option.data.icon} alt={option.data.label} style={{width: 20}}/> {option.data.label}
-      </Space>
-    )}
-  />
-    )
-}
+// if(!coin){
+//     return(
+//         <Select
+//     style={{ width: '100%' }}
+//     onSelect={(v) => setCoin(selectCoins.find((c) => c.symbol === v))}
+//     value="Select coin"
+//     options={selectCoins.map((coin)=>({
+//       label: coin.name,
+//       value: coin.symbol,
+//       icon: coin.imageUrl
+//     }))}
+//     optionRender={option => (
+//       <Space>
+//         <img src={option.data.icon} alt={option.data.label} style={{width: 20}}/> {option.data.label}
+//       </Space>
+//     )}
+//   />
+//     )
+// }
 
 const onFinish = (values) =>{
   const newCoin = {
