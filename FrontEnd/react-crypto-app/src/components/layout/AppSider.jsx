@@ -16,6 +16,10 @@ const siderStyle = {
 export default function AppSider(){
 const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
 
+const onClick = (coin) => {
+  console.log(coin)
+}
+
     return(
       <Layout.Sider width="15%" style={siderStyle}>
 
@@ -59,7 +63,7 @@ const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
                 {!item.isDollar && <span>{(item.value?.toFixed(4)) ?? '0.00'}</span>}
               </List.Item>
             )}/>
-            <Button>Sell coin</Button>
+            <Button onClick={onClick}>Sell coin</Button>
         </Card>
         ))
       )}
