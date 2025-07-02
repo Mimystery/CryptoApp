@@ -17,7 +17,11 @@ console.log(wallet)
     return (
         <Layout.Content>
           <Typography.Title level={3} style={{textAlign: 'left'}}>
-            Portfolio: {}
+            Portfolio: {wallet.map(coin => {
+              const price = +(prices.find(p => p.symbol.replace(/USDT$/, '').toLowerCase() === 
+              coin.symbol.toLowerCase())?.price)
+              return coin.totalAmount * price
+            }).reduce((acc, v) => (acc += v), 0).toFixed(2)}$
           </Typography.Title>
         </Layout.Content>
     )
