@@ -35,6 +35,19 @@ if(submitted){
   />)
 }
 
+if(coin.amount === 0){
+    return(
+        <Result
+    status="error"
+    title="Submission Failed"
+    subTitle={`You have 0 coins of ${coin.name}`}
+    extra={[
+      <Button key="close" onClick={onClose}>Close</Button>,
+    ]}
+  ></Result>
+    )
+}
+
 
 const onFinish = (values) =>{
   const newCoin = {
