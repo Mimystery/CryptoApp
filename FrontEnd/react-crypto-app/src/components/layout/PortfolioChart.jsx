@@ -15,7 +15,7 @@ const data = {
   datasets: [
     {
       label: '$',
-      data: wallet.map(c => c.totalAmount),
+      data: wallet.map(c => c.totalCost),
       backgroundColor: [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
