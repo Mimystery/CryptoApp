@@ -114,7 +114,6 @@ namespace CryptoApp.Application.Services
                         remainingAmount -= usedAmount;
                     }
 
-
                     var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
 
                     var invested = purchases.Sum(t => t.Amount * t.Price);
