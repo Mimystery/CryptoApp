@@ -22,9 +22,6 @@ export default function AppHeader(){
 const [drawer, setDrawer] = useState(false)
 const {prices, wallet, selectCoins, isAuthenticated, user} = useContext(CryptoContext)
 
-const handleSelect = (value) =>{
-  console.log(value)
-}
 const userDataRaw = localStorage.getItem('userData')
 const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
 

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Card, Statistic, List, Typography, Drawer} from 'antd';
 import { percentDifference } from '../../utils'
 import { CryptoContext } from '../../context/crypto-context';
+import SellCoinForm from './SellCoinForm';
 
 const siderStyle = {
   textAlign: 'center',
@@ -15,9 +16,13 @@ const siderStyle = {
 
 export default function AppSider(){
 const {prices, wallet, loading, isAuthenticated} = useContext(CryptoContext)
+const [drawer, setDrawer] = useState(false)
+const [selectedCoin, setSelectedCoin] = useState(null)
 
 const onClick = (coin) => {
   console.log(coin)
+  setSelectedCoin(coin)
+  setDrawer(true)
 }
 
     return(
@@ -70,13 +75,15 @@ const onClick = (coin) => {
         </>)}
 
       <Drawer
-    width={'30%'}
-    title="Sell coin"
-    closable={{ 'aria-label': 'Close Button' }}
-    open={true}
-    padding={'0rem'}
-    destroyOnHidden>
-  </Drawer>
+          width={'30%'}
+          title="Sell coin"
+          closable={{ 'aria-label': 'Close Button' }}
+          onClose={() => setDrawer(false)}
+          open={drawer}
+          padding={'0rem'}
+          destroyOnHidden>
+          <SellCoinForm onClose={() => setDrawer(false)} coin={selectedCoin}/>
+        </Drawer>
 
       </Layout.Sider>
     )
