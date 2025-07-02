@@ -33,6 +33,7 @@ const mapWallet = (wallet, prices) =>{
     const totalAmount = parseFloat(walletCoin.totalAmount);
     const invested = parseFloat(walletCoin.invested)
     const earned = parseFloat(walletCoin.earned)
+    const investedOnSold = parseFloat(walletCoin.investedOnSold)
 
     let grow = null;
     let growPercent = 0;
@@ -49,9 +50,8 @@ const mapWallet = (wallet, prices) =>{
     return {
       grow: grow,
       growPercent: growPercent,
-      totalProfit: totalAmount === 0
-        ? earned - invested
-        : (currentPrice - avgPrice) * totalAmount,
+      totalProfit: totalAmount === 0 ? 
+      earned - invested : (earned - investedOnSold) + (currentPrice - avgPrice) * totalAmount,
       ...walletCoin
     };
   })

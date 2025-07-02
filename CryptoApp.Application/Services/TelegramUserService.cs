@@ -106,6 +106,9 @@ namespace CryptoApp.Application.Services
                     var invested = purchases.Sum(t => t.Amount * t.Price);
                     var earned = -sales.Sum(t => t.Amount * t.Price);
 
+                    var soldAmount = -sales.Sum(t => t.Amount);
+                    var investedOnSold = averagePrice * soldAmount;
+
                     return new CoinSummaryResponse
                     {
                         CoinId = s.First().CoinId,
@@ -117,6 +120,7 @@ namespace CryptoApp.Application.Services
                         TotalCost = totalCost,
                         Invested = invested,
                         Earned = earned,
+                        InvestedOnSold = investedOnSold,
                     };
                 }).ToList();
 
