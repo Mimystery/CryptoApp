@@ -11,7 +11,7 @@ const headerStyle = {
   height: 60,
   padding: '1rem',
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-end',
   alignItems: 'center',
   background: 'white',
   borderBottom: '1px solid #d9d9d9',
