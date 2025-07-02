@@ -52,6 +52,7 @@ const mapWallet = (wallet, prices) =>{
       growPercent: growPercent,
       totalProfit: totalAmount === 0 ? 
       earned - invested : (earned - investedOnSold) + (currentPrice - avgPrice) * totalAmount,
+      totalCost: walletCoin.totalAmount * coin.price,
       ...walletCoin
     };
   })
