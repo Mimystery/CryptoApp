@@ -15,5 +15,7 @@ namespace CryptoApp.Core.Contracts
         public double TotalAmount { get; set; }
         public double AveragePrice { get; set; }
         public double TotalCost { get; set; }
+        public double Invested { get; set; }
+        public double Earned { get; set; }
     }
 }

@@ -103,6 +103,9 @@ namespace CryptoApp.Application.Services
                     var totalCost = s.Sum(t => t.Amount * t.Price);
                     var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
 
+                    var invested = purchases.Sum(t => t.Amount * t.Price);
+                    var eaned = -sales.Sum(t => t.Amount * t.Price);
+
                     return new CoinSummaryResponse
                     {
                         CoinId = s.First().CoinId,
@@ -112,6 +115,8 @@ namespace CryptoApp.Application.Services
                         TotalAmount = totalAmount,
                         AveragePrice = averagePrice,
                         TotalCost = totalCost,
+                        Invested = invested,
+                        Earned = eaned,
                     };
                 }).ToList();
 
