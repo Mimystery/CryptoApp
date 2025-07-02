@@ -28,7 +28,6 @@ const columns = [
     dataIndex: 'transactionDate',
 
     sorter: (a, b) => a.transactionDate - b.transactionDate,
-    onFilter: (value, record) => record.address.indexOf(value) === 0,
   },
   
 ];
@@ -55,7 +54,11 @@ const onChange = (pagination, filters, sorter, extra) => {
 };
     return(
         <Table 
-        pagination={false}
+        pagination={{
+            pageSize: 10,
+            showSizeChanger: true, 
+            showQuickJumper: true,
+        }}
         columns={columns} 
         dataSource={data} 
         onChange={onChange} 
