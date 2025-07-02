@@ -37,7 +37,7 @@ export default function TransactionsTable(){
 const {wallet, prices, transactions} = useContext(CryptoContext)
 
 const data = transactions.map((c) => ({
-    key: c.coinId,
+    key: c.id,
     name: c.name,
     price: c.price,
     amount: c.amount,
