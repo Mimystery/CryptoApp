@@ -49,7 +49,7 @@ const onFinish = (values) =>{
   console.log(values)
   console.log(newCoin)
   coinRef.current = newCoin
-  //addCoin(newCoin)
+  addCoin(newCoin)
   setSubmit(true)
 }
 
