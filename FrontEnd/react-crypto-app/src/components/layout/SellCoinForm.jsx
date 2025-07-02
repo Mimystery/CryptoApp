@@ -35,7 +35,7 @@ if(submitted){
   />)
 }
 
-if(coin.amount === 0){
+if(coin.totalAmount === 0){
     return(
         <Result
     status="error"
