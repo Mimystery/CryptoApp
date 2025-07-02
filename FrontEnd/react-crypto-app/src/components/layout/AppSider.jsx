@@ -20,7 +20,6 @@ const [drawer, setDrawer] = useState(false)
 const [selectedCoin, setSelectedCoin] = useState(null)
 
 const onClick = (coin) => {
-  console.log(coin)
   setSelectedCoin(coin)
   setDrawer(true)
 }
