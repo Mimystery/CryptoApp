@@ -21,6 +21,8 @@ const {selectCoins, addCoin, user, prices} = useContext(CryptoContext)
 const [submitted, setSubmit] = useState(false)
 const coinRef = useRef()
 
+console.log(coin)
+
 if(submitted){
   return (<Result
     status="success"
