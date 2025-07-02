@@ -60,14 +60,10 @@ const mapWallet = (wallet, prices) =>{
 useEffect(() =>{
   const token = localStorage.getItem('jwt');
   const savedUser = localStorage.getItem('userData')
-  console.log("Context:" + savedUser);
-  console.log('Token context:' + token);
   isTokenExpired(token)
   if(!isTokenExpired(token) && token && savedUser){
     setIsAuthenticated(true);
     setUser(JSON.parse(savedUser))
-    console.log(isAuthenticated)
-    console.log(user)
   }
   else{
     setIsAuthenticated(false);

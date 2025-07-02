@@ -37,11 +37,9 @@ const user = JSON.parse(localStorage.getItem('userData'))
 export const fetchSelectCoins = async (token) => {
   try 
     {
-       const token = localStorage.getItem('jwt');
-      console.log("Token in method fetchSelectCoins:  " + token)
+      const token = localStorage.getItem('jwt');
       const response = await fetch(`https://cryptoapp-foee.onrender.com/api/Coin/list`,{
       method: 'GET',
-       //credentials: 'include',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
