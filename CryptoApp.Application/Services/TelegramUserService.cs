@@ -94,15 +94,24 @@ namespace CryptoApp.Application.Services
             var transactions = await _tgUserRepository.GetTransactionsByUserId(telegramUserId);
             var summary = transactions
                 .GroupBy(t => t.Symbol)
-                .Select(s => new CoinSummaryResponse
+                .Select(s =>
                 {
-                    CoinId = s.First().CoinId,
-                    Symbol = s.Key,
-                    Name = s.First().Name,
-                    ImageUrl = s.First().ImageUrl,
-                    TotalAmount = s.Sum(t => t.Amount),
-                    AveragePrice = s.Average(t => t.Price),
-                    TotalCost = s.Sum(t => t.Amount * t.Price),
+                    var purchases = s.Where(t => t.Amount > 0).ToList();
+
+                    var totalAmount = s.Sum(t => t.Amount);
+                    var totalCost = s.Sum(t => t.Amount * t.Price);
+                    var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
+
+                    return new CoinSummaryResponse
+                    {
+                        CoinId = s.First().CoinId,
+                        Symbol = s.Key,
+                        Name = s.First().Name,
+                        ImageUrl = s.First().ImageUrl,
+                        TotalAmount = totalAmount,
+                        AveragePrice = averagePrice,
+                        TotalCost = totalCost,
+                    };
                 }).ToList();
 
             return summary;
