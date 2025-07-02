@@ -92,11 +92,16 @@ const updateTotal = () => {
                     if( value > coin.totalAmount){
                         return Promise.reject(`Max amount is ${coin.totalAmount}`)
                     }
+                    if(value<0){
+                        return Promise.reject('Amount cannot be negative')
+                    }
                     return Promise.resolve()
                 },
             },
         ]}>
-            <InputNumber 
+        <InputNumber 
+            min={0}
+            step={0.000001}
             onChange={(val) => {
                 const value = parseFloat(val) || 0;
                 if(value > coin.totalAmount){
@@ -109,7 +114,8 @@ const updateTotal = () => {
             parser={(value) => value.replace(',', '.').replace(/[^\d.]/g, '')}/>
         </Form.Item>
         <Button onClick={() => {
-                form.setFieldsValue({ amount: coin.totalAmount})
+            const maxValue = parseFloat(coin.totalAmount.toFixed(6))
+                form.setFieldsValue({ amount: maxValue})
                 updateTotal()
             }}
             type="default">Max
