@@ -18,6 +18,7 @@ const cryptoPriceMap = prices.reduce((acc, c) => {
   return acc
 })
 
+console.log(cryptoPriceMap)
     return (
         <Layout.Content>
           <Typography.Title level={3} style={{textAlign: 'left'}}>
