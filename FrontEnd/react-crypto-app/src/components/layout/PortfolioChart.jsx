@@ -1,10 +1,17 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useContext } from 'react';
 import { Pie } from 'react-chartjs-2';
+import { CryptoContext } from '../../context/crypto-context';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+
+export default function PortfolioChart() {
+const {wallet, prices} = useContext(CryptoContext)
+
+const data = {
+  labels: wallet.map(c => c.name),
   datasets: [
     {
       label: '# of Votes',
@@ -21,8 +28,9 @@ export const data = {
   ],
 };
 
-export default function PortfolioChart() {
     return(
-        <Pie data={data}></Pie>
+        <div style={{display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: '40$'}}>
+            <Pie data={data}></Pie>
+        </div>
     )
 }
