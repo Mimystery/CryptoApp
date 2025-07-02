@@ -79,7 +79,7 @@ const updateTotal = () => {
       required
       style={{ width: '100%', marginRight: '1rem' }}
     >
- <InputGroup compact>
+    <div style={{ display: 'flex', gap: '8px' }}>
       <Form.Item 
         name="amount"
         noStyle
@@ -112,9 +112,9 @@ const updateTotal = () => {
                 form.setFieldsValue({ amount: coin.totalAmount})
                 updateTotal()
             }}
-            type="default">
+            type="default">Max
         </Button>
-    </InputGroup>
+    </div>
     </Form.Item>
 
     <Form.Item
