@@ -46,8 +46,10 @@ const onFinish = (values) =>{
     price: values.price,
     transactionDate: values.date?.$d ?? new Date(),
   }
+  console.log(values)
+  console.log(newCoin)
   coinRef.current = newCoin
-  addCoin(newCoin)
+  //addCoin(newCoin)
   setSubmit(true)
 }
 
