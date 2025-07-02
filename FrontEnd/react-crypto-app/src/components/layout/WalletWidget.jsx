@@ -18,12 +18,13 @@ const cryptoPriceMap = prices.reduce((acc, c) => {
   return acc
 }, {})
 
-console.log(cryptoPriceMap)
+const portfolio = wallet.map(coin => coin.totalAmount * cryptoPriceMap[coin.symbol.toLowerCase()])
+            .reduce((acc, v) => (acc += v), 0).toFixed(2)
+
     return (
         <Layout.Content>
           <Typography.Title level={3} style={{textAlign: 'left'}}>
-            Portfolio: {wallet.map(coin => coin.totalAmount * cryptoPriceMap[coin.symbol.toLowerCase()])
-            .reduce((acc, v) => (acc += v), 0).toFixed(2)}$
+            Portfolio: {portfolio}$
           </Typography.Title>
         </Layout.Content>
     )
