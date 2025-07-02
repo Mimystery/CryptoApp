@@ -96,11 +96,25 @@ namespace CryptoApp.Application.Services
                 .GroupBy(t => t.Symbol)
                 .Select(s =>
                 {
-                    var purchases = s.Where(t => t.Amount > 0).ToList();
+                    var purchases = s.Where(t => t.Amount > 0).OrderBy(t => t.TransactionDate).ToList();
                     var sales = s.Where(t => t.Amount < 0).ToList();
 
                     var totalAmount = s.Sum(t => t.Amount);
-                    var totalCost = s.Sum(t => t.Amount * t.Price);
+
+                    double totalCost = 0;
+                    double remainingAmount = totalAmount;
+
+                    foreach (var purchase in purchases)
+                    {
+                        if (remainingAmount <= 0)
+                            break;
+
+                        var usedAmount = Math.Min(purchase.Amount, remainingAmount);
+                        totalCost += usedAmount * purchase.Price;
+                        remainingAmount -= usedAmount;
+                    }
+
+
                     var averagePrice = purchases.Any() ? purchases.Sum(t => t.Amount * t.Price) / purchases.Sum(t => t.Amount) : 0;
 
                     var invested = purchases.Sum(t => t.Amount * t.Price);
