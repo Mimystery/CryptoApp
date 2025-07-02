@@ -15,7 +15,7 @@ const validateMessages = {
 };
 
 
-export default function SellCoinForm({onClose}, coin){
+export default function SellCoinForm({onClose}, {coin}){
 const [form] = Form.useForm()
 const {selectCoins, addCoin, user, prices} = useContext(CryptoContext)
 const [submitted, setSubmit] = useState(false)
