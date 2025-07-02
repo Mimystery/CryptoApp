@@ -16,7 +16,7 @@ const {wallet, prices} = useContext(CryptoContext)
 const cryptoPriceMap = prices.reduce((acc, c) => {
   acc[c.symbol.replace(/USDT$/, '').toLowerCase()] = +(c.price)
   return acc
-})
+}, {})
 
 console.log(cryptoPriceMap)
     return (
