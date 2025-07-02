@@ -40,7 +40,7 @@ if(submitted){
 
 const onFinish = (values) =>{
   const newCoin = {
-    coinId: coin.id,
+    coinId: coin.coinId,
     symbol: coin.symbol,
     name: coin.name,
     imageUrl: coin.imageUrl,
