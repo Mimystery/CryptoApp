@@ -68,6 +68,16 @@ const onClick = (coin) => {
         ))
       )}
         </>)}
+
+      <Drawer
+    width={'30%'}
+    title="Sell coin"
+    closable={{ 'aria-label': 'Close Button' }}
+    open={true}
+    padding={'0rem'}
+    destroyOnHidden>
+  </Drawer>
+
       </Layout.Sider>
     )
 }
