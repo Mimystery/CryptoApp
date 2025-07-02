@@ -101,7 +101,7 @@ const updateTotal = () => {
         ]}>
         <InputNumber 
             min={0}
-            step={0.000001}
+            step={0.1}
             onChange={(val) => {
                 const value = parseFloat(val) || 0;
                 if(value > coin.totalAmount){
