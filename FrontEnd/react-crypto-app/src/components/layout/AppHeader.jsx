@@ -30,21 +30,6 @@ const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
 
     return(
     <Layout.Header style={headerStyle}>
-    <Select
-      style={{ width: 250 }}
-      onSelect={handleSelect}
-      value="press / to open"
-      options={selectCoins.map((coin) => ({
-        label: coin.name,
-        value: coin.symbol,
-        icon: coin.imageUrl,
-      }))}
-      optionRender={(option) => (
-        <Space>
-          <img src={option.data.icon} alt={option.data.label} style={{ width: 20 }} /> {option.data.label}
-        </Space>
-      )}
-    />
 
   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
     {!isAuthenticated && <TelegramWidget />}
