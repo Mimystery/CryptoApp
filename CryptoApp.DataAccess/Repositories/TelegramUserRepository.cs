@@ -73,41 +73,12 @@ namespace CryptoApp.DataAccess.Repositories
                 TransactionDate = coinTransaction.TransactionDate
             };
 
-            try
-            {
-                // Добавляем транзакцию через навигационное свойство пользователя
-                //user.Transactions.Add(transaction);
-                //_context.TelegramUsers.Update(user);                        
-                _context.CoinTransactions.Add(transaction);
-                await _context.SaveChangesAsync();
-                Console.WriteLine("Transaction saved successfully.");
-            }
-            catch (DbUpdateException dbEx)
-            {
-                Console.Error.WriteLine("DbUpdateException occurred while saving transaction:");
-                Console.Error.WriteLine(dbEx);
-
-                if (dbEx.InnerException != null)
-                {
-                    Console.Error.WriteLine("Inner exception:");
-                    Console.Error.WriteLine(dbEx.InnerException.Message);
-                }
-
-                throw; 
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine("Unexpected exception occurred while saving transaction:");
-                Console.Error.WriteLine(ex);
-
-                if (ex.InnerException != null)
-                {
-                    Console.Error.WriteLine("Inner exception:");
-                    Console.Error.WriteLine(ex.InnerException.Message);
-                }
-
-                throw;
-            }
+            //user.Transactions.Add(transaction);
+            //_context.TelegramUsers.Update(user);                        
+            _context.CoinTransactions.Add(transaction);
+            await _context.SaveChangesAsync();
+            Console.WriteLine("Transaction saved successfully.");
+            
         }
 
         public async Task<List<CoinTransaction>> GetTransactionsByUserId(int telegramUserId)
