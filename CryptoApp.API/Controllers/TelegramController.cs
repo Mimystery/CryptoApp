@@ -15,13 +15,11 @@ namespace CryptoApp.API.Controllers
     {
         private readonly ITelegramUserService _tgUserService;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContext;
 
-        public TelegramController(ITelegramUserService tgUserService, IMapper mapper, IHttpContextAccessor httpContext)
+        public TelegramController(ITelegramUserService tgUserService, IMapper mapper)
         {
             _tgUserService = tgUserService;
             _mapper = mapper;
-            _httpContext = httpContext;
         }
 
         [HttpPost("auth")]
@@ -35,8 +33,6 @@ namespace CryptoApp.API.Controllers
             var mappedData = _mapper.Map<TelegramUser>(data);
 
             var token = await _tgUserService.LoginTelegramUser(mappedData);
-
-            //_httpContext.HttpContext.Response.Cookies.Append("first-cookies", token);
 
             return Ok(new { token });
         }
@@ -54,8 +50,7 @@ namespace CryptoApp.API.Controllers
         }
 
         [HttpPost("user/{telegramUserId}/transaction")]
-        public async Task<ActionResult> AddTransaction(int telegramUserId,
-            [FromBody] CoinTransactionRequest coinTransaction)
+        public async Task<ActionResult> AddTransaction(int telegramUserId, [FromBody] CoinTransactionRequest coinTransaction)
         {
             if (coinTransaction == null)
             {
