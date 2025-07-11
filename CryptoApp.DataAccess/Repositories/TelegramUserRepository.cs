@@ -73,9 +73,9 @@ namespace CryptoApp.DataAccess.Repositories
                 TransactionDate = coinTransaction.TransactionDate
             };
 
-            //user.Transactions.Add(transaction);
-            //_context.TelegramUsers.Update(user);                        
+            user.Transactions.Add(transaction);
             _context.CoinTransactions.Add(transaction);
+
             await _context.SaveChangesAsync();
             Console.WriteLine("Transaction saved successfully.");
             
