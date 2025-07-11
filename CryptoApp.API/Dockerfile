@@ -8,6 +8,7 @@ COPY CryptoApp.API/*.csproj ./CryptoApp.API/
 COPY CryptoApp.Application/*.csproj ./CryptoApp.Application/
 COPY CryptoApp.DataAccess/*.csproj ./CryptoApp.DataAccess/
 COPY CryptoApp.Core/*.csproj ./CryptoApp.Core/
+COPY CryptoApp.Core/*.csproj ./CryptoApp.Tests/
 
 RUN dotnet restore "CryptoApp.API.sln"
 
