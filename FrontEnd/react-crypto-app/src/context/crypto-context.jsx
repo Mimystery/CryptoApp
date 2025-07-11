@@ -23,6 +23,8 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [user, setUser] = useState(null);
 const [isInitialized, setIsInitialized] = useState(false);
 
+console.log(user)
+
 const mapWallet = (wallet, prices) =>{
   if (!Array.isArray(wallet) || !Array.isArray(prices)) return [];
   return wallet.map(walletCoin => {

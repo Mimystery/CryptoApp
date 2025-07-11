@@ -1,6 +1,5 @@
 import { Layout, Tabs } from 'antd';
 import { useContext, useEffect, useState } from "react";
-import { fetchFullCoins, fetchPrice, fetchSelectCoins } from '../../api';
 import { CryptoContext } from '../../context/crypto-context';
 import TradingViewWidget from './TradingViewWidget';
 import WalletWidget from './WalletWidget';
