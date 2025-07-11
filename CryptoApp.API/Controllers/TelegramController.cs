@@ -25,10 +25,10 @@ namespace CryptoApp.API.Controllers
         [HttpPost("auth")]
         public async Task<ActionResult<TelegramAuthResponse>> Authenticate([FromBody] TelegramAuthResponse data)
         {
-            //if (!_tgUserService.VerifyTelegramAuth(data))
-            //{
-            //    return Unauthorized("Invalid data");
-            //}
+            if (!_tgUserService.VerifyTelegramAuth(data))
+            {
+                return Unauthorized("Invalid data");
+            }
 
             var mappedData = _mapper.Map<TelegramUser>(data);
 
