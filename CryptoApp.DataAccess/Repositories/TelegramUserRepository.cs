@@ -25,7 +25,7 @@ namespace CryptoApp.DataAccess.Repositories
 
         public async Task<TelegramUser> GetById(int id)
         {
-            var telegramUser = await _context.TelegramUsers.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            var telegramUser = await _context.TelegramUsers.AsNoTracking().Include(u => u.Transactions).FirstOrDefaultAsync(u => u.Id == id);
 
             return _mapper.Map<TelegramUser>(telegramUser);
         }
@@ -73,9 +73,11 @@ namespace CryptoApp.DataAccess.Repositories
                 TransactionDate = coinTransaction.TransactionDate
             };
 
-            user.Transactions.Add(transaction);
-            _context.CoinTransactions.Add(transaction);
+            //user.Transactions.Add(transaction);
+            //_context.TelegramUsers.Update(user);
 
+
+            _context.CoinTransactions.Add(transaction);
             await _context.SaveChangesAsync();
             Console.WriteLine("Transaction saved successfully.");
             
